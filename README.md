@@ -12,23 +12,38 @@
    ```
    git clone git@github.com:tvsltd/odoo-development.git
    ```
-2. Update submodule
+2. Open project and Clone the official odoo and themes 
+   ```
+   git clone --branch 17.0 --depth 1 https://github.com/odoo/odoo.git odoo
+   ```
+   ```
+   git clone --branch 17.0 --depth 1 https://github.com/odoo/design-themes.git themes
+   ```
+3. Add submodules
+   ```
+   git submodule add -b 17.0 https://github.com/odoo/odoo.git odoo
+
+   ```
+   ```
+   git submodule add -b 17.0 https://github.com/odoo/design-themes.git themes
+   ```
+4. Initialize and update submodules
    ```
    git submodule update --init --recursive
    ```
-3. Update and Upgrade machine
+5. Update and Upgrade machine
    ```
    sudo apt update && sudo apt upgrade
    ```
-4. Essential packages for the Odoo setup on the Ubuntu system
+6. Essential packages for the Odoo setup on the Ubuntu system
    ```
    sudo apt install wget build-essential libzip-dev python3-dev libxslt1-dev python3-pip libldap2-dev python3-wheel libsasl2-dev python3-venv python3-setuptools libjpeg-dev xfonts-75dpi xfonts-base libpq-dev libffi-dev fontconfig 
    ```
-5. Install rtlcss node module for RTL support
+7. Install rtlcss node module for RTL support
    ```
    sudo npm install -g rtlcss
    ```
-6. Install wkhtmltopdf manually. It's not installed through pip as a debian package
+8. Install wkhtmltopdf manually. It's not installed through pip as a debian package
    ###### For Ubuntu 22.04
    ```
    wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
@@ -50,7 +65,7 @@
    sudo apt install wkhtmltox_0.12.6-1.xenial_amd64.deb
    ```
    Check https://wkhtmltopdf.org/downloads.html for your operating system
-7. Install Postgres and PgAdmin
+9. Install Postgres and PgAdmin
    ###### Postgres
    Need to install postgres locally and create a user with name `odoo` and database with name `project-name`. Installation guide link https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart
    ###### PgAdmin
@@ -62,23 +77,23 @@
    ```
    docker compose -f docker-compose.postgres.yml up
    ```
-8. Open terminal and create virtual environment
-   ```
-   python3 -m venv venv  
-   ```
-   ```
-   source venv/bin/activate  
-   ```
-9. Install wheel and package requirements
-   ```
-   pip3 install wheel 
-   ```
-   ```
-   pip3 install -r odoo/requirements.txt
-   ```
-10. Open project by PyCharm
-11. Add new Python Interpreter in PyCharm using the created virtual environment
-12. Create a Configuration by Python
+10. Open terminal and create virtual environment
+    ```
+    python3 -m venv venv  
+    ```
+    ```
+    source venv/bin/activate  
+    ```
+11. Install wheel and package requirements
+    ```
+    pip3 install wheel 
+    ```
+    ```
+    pip3 install -r odoo/requirements.txt
+    ```
+12. Open project by PyCharm
+13. Add new Python Interpreter in PyCharm using the created virtual environment
+14. Create a Configuration by Python
    > Script: `~~/odoo/odoo-bin` (replace ~~ with absolute path)
    
    > Parameters: `-c ~~/conf/odoo.conf` (replace ~~ with absolute path)
@@ -86,5 +101,5 @@
    > Python Interpreter: Choose the interpreter that you created in step 11
    
    > Working Directory: (project root directory with absolute path)
-13. Copy `conf/odoo.conf.example` as `conf/odoo.conf` and check all required variables.
-14. Run the project. Output will be shown at http://localhost:8069
+15. Copy `conf/odoo.conf.example` as `conf/odoo.conf` and check all required variables.
+16. Run the project. Output will be shown at http://localhost:8069
