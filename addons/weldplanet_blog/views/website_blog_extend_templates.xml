@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- Codes for Blog Post Listing page START -->
+<template id="blog_post_short_extend" name="Listing Page Breadcrumb" inherit_id="website_blog.blog_post_short">
+    <xpath expr="//div[@id='o_wblog_blog_top']" position="after">
+        <div class="bg-slate-blue">
+            <div class="container">
+                <h4 class="text-white website_blog_extend_page_title">
+                    <t t-if="blog">
+                        Home / <span t-esc="blog.name" />
+                    </t>
+                    <t t-else="">
+                        Home / Blog
+                    </t>
+                </h4>
+            </div>
+        </div>
+    </xpath>
+
+    <xpath expr="//t[@t-call='website_blog.blogs_nav']" position="replace">
+        <t t-call="weldplanet_blog.blogs_nav_copy">
+            <t t-set="search" t-value="original_search or search"/>
+        </t>
+
+
+    </xpath>
+</template>
+<!-- Codes for Blog Post Listing page END -->
+
+<!-- Codes for Blog Post Details page START -->
+<template id="blog_post_complete_extend" inherit_id="website_blog.blog_post_complete">
+    <xpath expr="//section[@id='o_wblog_post_main']" position="before">
+        <!-- <nav aria-label="breadcrumb" t-attf-class="breadcrumb flex-nowrap py-0 px-0 css_editable_mode_hidden #{additionnal_classes or ''}">
+            <li t-if="len(blogs) &gt; 1" class="breadcrumb-item"><a href="/blog">All Blogs</a></li>
+            <li class="breadcrumb-item">
+                <a t-attf-href="#{blog_url(tag=None, date_begin=None, date_end=None)}" t-esc="blog.name"/>
+            </li>
+            <li class="breadcrumb-item text-truncate active"><span t-esc="blog_post.name"/></li>
+        </nav> -->
+
+        <t t-if="opt_blog_post_breadcrumb">
+            <div class="bg-slate-blue mb-3">
+                <div class="container">
+                    <h4 class="text-white weldplanet_blog_page_title">
+                        <t t-if="blog">
+                            Home / <span t-esc="blog.subtitle" />
+                        </t>
+                        <t t-else="">
+                            Home / Blog Details
+                        </t>
+                    </h4>
+                </div>
+            </div>
+        </t>
+    </xpath>
+
+    <xpath expr="//section[@id='o_wblog_post_main']" position="replace">
+        <section id="o_wblog_post_main" t-attf-class="container pt-4 pb-5 #{'anim' in request.params and 'o_wblog_post_main_transition'}">
+            <!-- Sidebar-enabled Layout -->
+            <div t-if="opt_blog_post_sidebar" t-attf-class="mx-auto #{opt_blog_post_readable and 'o_wblog_read_with_sidebar'}">
+                <div t-attf-class="d-flex flex-column flex-lg-row #{opt_blog_post_readable and 'justify-content-between'}">
+                    <div id="o_wblog_post_content" t-attf-class="#{opt_blog_post_readable and 'o_container_small mx-0 w-100 flex-shrink-0' or 'col-md-8 col-sm-12'}">
+                        <t t-call="weldplanet_blog.opt_blog_post_regular_cover_copy" />
+                        <t t-call="website_blog.blog_post_content"/>
+                    </div>
+                    <div id="o_wblog_post_sidebar_col" t-attf-class="ps-lg-5 #{not opt_blog_post_readable and 'flex-grow-1 col-md-4 col-sm-12'}">
+                        <t t-call="website_blog.blog_post_sidebar"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No-Sidebar Layout -->
+            <div t-if="not opt_blog_post_sidebar" t-attf-class="#{opt_blog_post_readable and 'o_container_small'}">
+                <div class="d-flex flex-column flex-lg-row">
+                    <div id="o_wblog_post_content" t-attf-class=" #{opt_blog_post_readable and 'o_container_small w-100 flex-shrink-0'}">
+                        <t t-call="weldplanet_blog.opt_blog_post_regular_cover_copy" />
+                        <t t-call="website_blog.blog_post_content"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="container" t-if="is_view_active('website_blog.opt_blog_post_comment')">
+                <div class="row">
+                    <div class="#{'col-md-8 col-sm-12' if opt_blog_post_sidebar else 'col-12'}">
+
+                        <t t-set="readableClass" t-if="opt_blog_post_readable and opt_blog_post_sidebar" t-value="'o_wblog_read_with_sidebar'"/>
+                        <t t-set="readableClass" t-elif="opt_blog_post_readable" t-value="'o_container_small'"/>
+
+                        <div t-attf-class="mx-auto #{readableClass}">
+                            <div id="o_wblog_post_comments" t-attf-class="pt-4 o_container_small">
+                                <div groups="base.group_public" class="small mb-4">
+                                    <a t-attf-href="/web/login?redirect=/blog/{{slug(blog_post.blog_id)}}/{{slug(blog_post)}}#discussion" class="btn btn-sm btn-primary"><b>Sign in</b></a> to leave a comment
+                                </div>
+                                <t t-call="portal.message_thread">
+                                    <t t-set="object" t-value="blog_post"/>
+                                </t>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div> -->
+        </section>
+    </xpath>
+</template>
+
+<template id="opt_blog_post_regular_cover_copy" name="Regular Cover">
+    <h1 t-field="blog_post.name" id="o_wblog_post_name" data-oe-expression="blog_post.name" t-att-data-blog-id="blog_post.id" placeholder="Title" />
+    <div class="mb-3" t-field="blog_post.subtitle" id="o_wblog_post_subtitle"  placeholder="Subtitle" />
+
+    <t t-call="website.record_cover">
+        <t t-set="_record" t-value="blog_post"/>
+        <t t-set="additionnal_classes" t-value="'o_wblog_post_page_cover o_wblog_post_page_cover_regular rounded shadow overflow-hidden'"/>
+        <t t-set="use_size" t-value="True"/>
+    </t>
+
+    <div t-att-class="not opt_blog_post_breadcrumb and 'pt-4'">
+        <div class="text-muted mb-2  d-flex justify-content-between">
+            <div  class="my-3">
+                <i class="fa fa-calendar-o fa-fw"/>
+                <span t-field="blog_post.post_date" class="text-muted" t-options="{'format': 'long', 'date_only': 'true'}"/>
+            </div>
+
+            <div t-if="len(blog_post.tag_ids) > 0" class="my-3">
+                <div>Tags:
+                    <t t-foreach="blog_post.tag_ids" t-as="one_tag">
+                        <a class="badge text-primary border me-1 post_link" t-attf-href="#{blog_url(tag=slug(one_tag), date_begin=False, date_end=False)}" t-esc="one_tag.name"/>
+                    </t>
+                </div>
+            </div>
+
+            <!-- <span t-if="len(blog_post.message_ids) > 0" class="text-nowrap ps-2 o_not_editable">|
+                <i class="fa fa-comment text-muted me-1"/>
+                <a href="#discussion">
+                    <t t-esc="len(blog_post.message_ids)"/>
+                    <t t-if="len(blog_post.message_ids)>1">Comments</t>
+                    <t t-else="">Comment</t>
+                </a>
+            </span>
+            <span t-elif="is_view_active('website_blog.opt_blog_post_comment')">| No comments yet</span> -->
+        </div>
+    </div>
+</template>
+
+<template id="opt_blog_post_regular_cover_extend" inherit_id="website_blog.opt_blog_post_regular_cover">
+    <xpath expr="//div[@class='container']" position="replace"></xpath>
+</template>
+
+<template id="blog_post_content_extend" inherit_id="website_blog.blog_post_content">
+    <xpath expr="//div[contains(@class, 'css_editable_mode_hidden')]" position="replace">
+        <div class="o_wblog_social_links d-flex flex-wrap mx-n1 o_not_editable justify-content-end">
+            <span style="margin-top: 0.8rem;padding-right: 1rem;font-weight: bold;">
+                Share with
+            </span>
+            <t t-set="classes" t-translation="off">bg-100 border mx-1 mb-2 rounded-circle d-flex align-items-center justify-content-center text-decoration-none</t>
+            <a href="#" aria-label="Facebook" title="Share on Facebook" t-attf-class="o_facebook #{classes}"><i class="fa fa-facebook-square text-facebook"/></a>
+            <a href="#" aria-label="Twitter" title="Share on Twitter" t-attf-class="o_twitter #{classes}"><i class="fa fa-twitter text-twitter" aria-label="Twitter" title="Twitter"/></a>
+            <a href="#" aria-label="LinkedIn" title="Share on LinkedIn" t-attf-class="o_linkedin #{classes}"><i class="fa fa-linkedin text-linkedin" aria-label="LinkedIn" title="LinkedIn"/></a>
+        </div>
+    </xpath>
+</template>
+
+<template id="opt_blog_post_read_next_extend" inherit_id="website_blog.opt_blog_post_read_next">
+    <xpath expr="//t[@t-if='opt_blog_post_regular_cover']" position="replace">
+        <t t-if="opt_blog_post_regular_cover">
+            <t t-if="opt_blog_post_sidebar" t-set="readableClass" t-value="'o_wblog_read_with_sidebar'"/>
+            <t t-else="" t-set="readableClass" t-value="'o_container_small'"/>
+
+            <div class="container mb-5">
+                <div t-attf-class="#{'col-md-8 col-sm-12' if opt_blog_post_sidebar else 'col-12'}">
+                    <hr/>
+
+                    <div class="row">
+                        <div t-if="prev_post" class="col-md-6 col-sm-12">
+                            <a t-att-href="'/blog/' + slug(prev_post.blog_id) + '/' + slug(prev_post)" t-att-title="'Read previous ' + prev_post.name" class="d-flex align-items-center page p-3">
+                                <div class="flex-shrink-0 me-3 featured-image border rounded">
+                                    <t t-call="website.record_cover">
+                                        <t t-set="_record" t-value="prev_post"/>
+                                        <t t-set="additionnal_classes" t-value="'rounded shadow-sm overflow-hidden h-100'"/>
+                                    </t>
+                                </div>
+
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 t-field="prev_post.short_title" t-att-data-blog-id="prev_post.id" placeholder="Blog Post Title" class="card-title me-3" />
+
+                                        <div class="prev text-end">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" class="bi bi-chevron-left">
+                                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+                                            </svg>
+                                            Prev
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <a t-att-href="'/blog/' + slug(next_post.blog_id) + '/' + slug(next_post)" t-att-title="'Read next ' + next_post.name" class="d-flex align-items-center page p-3">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="next">
+                                            Next
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" class="bi bi-chevron-right">
+                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
+                                            </svg>
+                                        </div>
+
+                                        <h5 t-field="next_post.short_title" t-att-data-blog-id="next_post.id" placeholder="Blog Post Title" class="card-title text-end" />
+                                    </div>
+                                </div>
+
+                                <div class="flex-shrink-0 ms-3 featured-image border rounded">
+                                    <t t-call="website.record_cover">
+                                        <t t-set="_record" t-value="next_post"/>
+                                        <t t-set="additionnal_classes" t-value="'rounded shadow-sm overflow-hidden h-100'"/>
+                                    </t>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </xpath>
+</template>
+
+<template id="blog_post_sidebar_extend" inherit_id="website_blog.blog_post_sidebar">
+    <xpath expr="//div[@id='o_wblog_post_sidebar']" position="attributes">
+        <attribute name="class">border border-light rounded-3 shadow</attribute>
+    </xpath>
+</template>
+<!-- Codes for Blog Post Details page END -->
+
+</odoo>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+<!-- Searchbox for Blog Post Listing page START -->
+<template id="blogs_nav_copy" name="Listing Page Search">
+    <div class="container py-4">
+        <!-- 'Search Box' -->
+        <t t-call="weldplanet_blog.website_search_box_input_copy">
+            <t t-set="search_type" t-valuef="blogs"/>
+            <t t-set="action" t-value="blog_url(tag=tag,search=search)"/>
+            <t t-set="display_description" t-valuef="true"/>
+            <t t-set="display_detail" t-valuef="false"/>
+            <input type="hidden" name="tag" t-att-value="tag"/>
+            <input type="hidden" name="date_begin" t-att-value="date_begin"/>
+            <input type="hidden" name="date_end" t-att-value="date_end"/>
+        </t>
+    </div>
+</template>
+
+<template id="website_search_box_copy" name="Website Searchbox">
+    <div role="search">
+        <input
+                type="search"
+                name="search"
+                t-att-class="'search-query form-control oe_search_box %s' % _input_classes"
+                t-att-placeholder="placeholder if placeholder else 'Search...'"
+                t-att-value="search"
+                t-att-data-search-type="search_type"
+                t-att-data-limit="limit or '5'"
+                t-att-data-display-image="display_image or 'true'"
+                t-att-data-display-description="display_description or 'true'"
+                t-att-data-display-extra-link="display_extra_link or 'true'"
+                t-att-data-display-detail="display_detail or 'true'"
+                t-att-data-order-by="order_by or 'name asc'"
+        />
+    </div>
+</template>
+
+<template id="website_search_box_input_copy" inherit_id="weldplanet_blog.website_search_box_copy" primary="True">
+    <xpath expr="//div[@role='search']" position="replace">
+        <div t-attf-class="d-flex justify-content-center gap-2 pt-3 #{_classes}" role="search">
+            <form id="listing-search" t-attf-class="o_searchbar_form o_wait_lazy_js w-sm-100 w-md-100 w-lg-50 s_searchbar_input #{_form_classes}" t-att-action="action" method="get" t-attf-data-snippet="s_searchbar_input">
+                <t>$0</t>
+                <input name="order" type="hidden" class="o_search_order_by" t-att-value="order_by if order_by else 'name asc'"/>
+                <t t-out="0"/>
+            </form>
+            <button
+                t-att-class="'btn btn-lg search-button oe_search_button %s' % (_submit_classes or 'btn-primary')"
+                aria-label="Search"
+                title="Search"
+                onclick="document.getElementById('listing-search').submit()">Search
+            </button>
+        </div>
+    </xpath>
+</template>
+<!-- Searchbox for Blog Post Listing page END -->
+
+<!-- Searchbox for Blog Post Details page START -->
+<template id="blogs_nav_copy_for_sidebar_search" name="Blog Details Page Search">
+    <div class="container py0-4">
+        <!-- 'Search Box' -->
+        <t t-call="weldplanet_blog.website_search_box_input_copy_for_sidebar_search">
+            <t t-set="search_type" t-valuef="blogs"/>
+            <t t-set="action" t-value="blog_url(tag=tag,search=search)"/>
+            <t t-set="display_description" t-valuef="true"/>
+            <t t-set="display_detail" t-valuef="false"/>
+            <input type="hidden" name="tag" t-att-value="tag"/>
+            <input type="hidden" name="date_begin" t-att-value="date_begin"/>
+            <input type="hidden" name="date_end" t-att-value="date_end"/>
+        </t>
+    </div>
+</template>
+
+<template id="website_search_box_copy_for_sidebar_search" name="Website Searchbox for Blog Details Page">
+    <div t-attf-class="input-group #{_classes}" role="search">
+        <input
+                type="search"
+                name="search"
+                t-att-class="'search-query form-control oe_search_box %s' % _input_classes"
+                t-att-placeholder="placeholder if placeholder else 'Search...'"
+                t-att-value="search"
+                t-att-data-search-type="search_type"
+                t-att-data-limit="limit or '5'"
+                t-att-data-display-image="display_image or 'true'"
+                t-att-data-display-description="display_description or 'true'"
+                t-att-data-display-extra-link="display_extra_link or 'true'"
+                t-att-data-display-detail="display_detail or 'true'"
+                t-att-data-order-by="order_by or 'name asc'"
+        />
+
+        <button type="submit" t-att-class="'btn oe_search_button %s' % (_submit_classes or 'btn-primary')" aria-label="Search" title="Search">
+            <i class="oi oi-search"/>
+            <!-- <span t-if="search" class="oe_search_found">
+                <small>(<t t-out="search_count or 0"/> found)</small>
+            </span> -->
+        </button>
+    </div>
+</template>
+
+<template id="website_search_box_input_copy_for_sidebar_search" inherit_id="weldplanet_blog.website_search_box_copy_for_sidebar_search" primary="True">
+    <xpath expr="//div[@role='search']" position="replace">
+        <form t-attf-class="o_searchbar_form o_wait_lazy_js s_searchbar_input #{_form_classes}" t-att-action="action" method="get" t-attf-data-snippet="s_searchbar_input">
+            <t>$0</t>
+            <input name="order" type="hidden" class="o_search_order_by" t-att-value="order_by if order_by else 'name asc'"/>
+            <t t-out="0"/>
+        </form>
+    </xpath>
+</template>
+<!-- Searchbox for Blog Post Details page END -->
+
+</odoo>

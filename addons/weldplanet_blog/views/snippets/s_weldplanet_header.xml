@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_weldplanet_header" name="Weldplanet Header">
+        <section class="s_weldplanet_header">
+            <div class="container">
+                <div class="d-flex gap-2">
+                    <div class="text-nowrap">
+                        <h4 class="text-weight-bold text-navy">Header Title</h4>
+                    </div>
+                    <div class="w-100 h-50 border-bottom border-dark"><span class="visibility-hidden">Bottom Border Line</span></div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Assets -->
+    <record id="weldplanet_blog.s_weldplanet_header_000_scss" model="ir.asset">
+        <field name="name">Snippet Header 000 SCSS</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">weldplanet_blog/static/src/snippets/s_weldplanet_header/000.scss</field>
+    </record>
+</odoo>

@@ -1,0 +1,139 @@
+.bg-slate-blue {
+  background-color: #6560D0;
+}
+
+// Blog post tags / badge Start
+
+.badge.text-primary {
+  background: #EDEFF2 !important;
+  color: #1A2942CC !important;
+  font-weight: 300 !important;
+}
+
+// Blog post tags / badge End
+
+// For Page Title
+.website_blog_extend_page_title {
+  padding-top: 1.2rem !important;
+  padding-bottom: 0.6rem !important;
+}
+
+// Search-box For Post Listing START
+.search-button, .search-button:hover {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  border-radius: 4px;
+}
+
+// Search-box For Post Listing END
+
+// Common codes START
+.website_blog {
+  /* For Post Listing */
+  #o_wblog_posts_loop {
+    .o_record_cover_container {
+      height: 15rem !important;
+    }
+
+    .card-footer.pb-2 {
+      padding-bottom: unset !important;
+    }
+  }
+
+  /* For Post Details */
+  .o_wblog_post_page_cover.o_wblog_post_page_cover_regular.o_half_screen_height, .o_wblog_post_page_cover_regular.cover_mid {
+    max-height: 40vh !important;
+  }
+}
+
+// Common codes END
+
+// For Post Listing START
+#o_wblog_posts_loop {
+  h2 {
+    text-align: center;
+  }
+}
+
+#o_wblog_post_sidebar {
+  .o_wblog_sidebar_block {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+  }
+}
+
+.card-body {
+  .o_blog_post_title {
+    font-size: 1.25rem;
+  }
+}
+
+.card-footer {
+  background-color: unset;
+  padding: 0rem 1rem;
+
+  .o_wblog_post_short_tag_section {
+    a {
+      font-size: 14px;
+      line-height: 16px;
+      // color: rgba(26, 41, 66, .8) !important;
+      // background: #edeff2;
+      border-radius: 14px;
+    }
+  }
+}
+
+// For Post Listing END
+
+// For Post Details START
+#o_wblog_post_footer {
+  .page {
+    background: #fff;
+    border: 1px solid #d8e2ef;
+    box-sizing: border-box;
+    box-shadow: 0 2px 18px rgba(194, 206, 229, .8);
+    border-radius: 8px;
+    text-decoration: none;
+
+    .featured-image {
+      width: 110px;
+      height: 110px;
+    }
+
+    .card-title {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 24px;
+      color: #1a2942;
+      width: 60%;
+    }
+
+    .next, .prev {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 28px;
+      color: rgba(26, 41, 66, .7);
+      width: 40%;
+    }
+  }
+}
+
+.follow-us.s_social_media {
+  a {
+    background: #f8faff;
+    box-shadow: 0 4px 6px rgba(69, 91, 128, .16);
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+
+    i {
+      margin-top: 15px !important;
+    }
+  }
+}
+// For Post Details END
+

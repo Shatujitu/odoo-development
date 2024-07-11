@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="header" model="ir.ui.view">
+            <field name="name">Weldplanet Header</field>
+            <field name="type">qweb</field>
+            <field name="key">weldplanet_sale.header</field>
+            <field name="inherit_id" ref="website.layout"/>
+            <field name="mode">extension</field>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="replace">
+                    <header id="top" data-anchor="true" data-name="Header"
+                            class="o_header_standard o_top_fixed_element">
+                        <!--<t t-call="website.navbar">
+                            <t t-set="_navbar_classes" t-valuef="shadow-sm"/>
+                            <div id="top_menu_container"
+                                 class="container justify-content-start justify-content-lg-between">
+                                &lt;!&ndash; Brand &ndash;&gt;
+                                <t t-call="website.placeholder_header_brand">
+                                    <t t-set="_link_class" t-valuef="me-4"/>
+                                </t>
+                                &lt;!&ndash; Navbar Collapse &ndash;&gt;
+                                <div id="top_menu_collapse" class="collapse navbar-collapse order-last order-lg-0 bg-danger">
+                                    <t t-call="website.navbar_nav">
+                                        <t t-set="_nav_class" t-valuef="flex-grow-1"/>
+                                        &lt;!&ndash; Menu &ndash;&gt;
+&lt;!&ndash;                                        <ul class="navbar-nav mx-lg-auto">&ndash;&gt;
+                                            <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                                <t t-call="website.submenu">
+                                                    <t t-set="item_class" t-valuef="nav-item"/>
+                                                    <t t-set="link_class" t-valuef="nav-link"/>
+                                                </t>
+                                            </t>
+&lt;!&ndash;                                        </ul>&ndash;&gt;
+                                        <t class="nav flex-nowrap flex-right bg-warning" contenteditable="false">
+                                            &lt;!&ndash; Shop Cart &ndash;&gt;
+                                            <t t-call="website_sale.header_cart_link">
+                                                <t t-set="_icon" t-value="True"/>
+                                                <t t-set="_item_class" t-value="'nav-item mt-1 me-2 me-lg-0'"/>
+                                                <t t-set="_link_class" t-value="'nav-link'"/>
+                                            </t>
+                                            &lt;!&ndash; Shop Wishlist &ndash;&gt;
+                                            <t t-call="website_sale_wishlist.header_wishlist_link">
+                                                <t t-set="_icon" t-value="True"/>
+                                                <t t-set="_item_class" t-value="'nav-item mt-1 me-2 me-lg-0'"/>
+                                                <t t-set="_link_class" t-value="'nav-link'"/>
+                                            </t>
+                                            &lt;!&ndash; Sign In &ndash;&gt;
+                                            <t t-call="portal.placeholder_user_sign_in">
+                                                <t t-set="_item_class" t-valuef="nav-item"/>
+                                                <t t-set="_link_class" t-valuef="nav-link fw-bold"/>
+                                            </t>
+                                            &lt;!&ndash; User Dropdown &ndash;&gt;
+                                            <t t-call="portal.user_dropdown">
+                                                <t t-set="_avatar" t-value="true"/>
+                                                <t t-set="_item_class" t-valuef="nav-item dropdown"/>
+                                                <t t-set="_link_class" t-valuef="nav-link"/>
+                                                <t t-set="_dropdown_menu_class" t-valuef="dropdown-menu-end"/>
+                                            </t>
+                                        </t>
+                                    </t>
+
+                                    &lt;!&ndash; Language Selector &ndash;&gt;
+                                    <t t-call="website.placeholder_header_language_selector">
+                                        <t t-set="_div_classes" t-valuef="my-auto ms-lg-2"/>
+                                    </t>
+                                </div>
+                                &lt;!&ndash; Call To Action &ndash;&gt;
+                                <t t-call="website.placeholder_header_call_to_action">
+                                    <t t-set="_div_classes" t-valuef="ms-lg-4"/>
+                                </t>
+                                &lt;!&ndash; Navbar Toggler &ndash;&gt;
+                                <t t-call="website.navbar_toggler">
+                                    <t t-set="_toggler_class" t-valuef="ms-auto"/>
+                                </t>
+                            </div>
+                        </t>-->
+                        <t t-call="website.navbar">
+                            <t t-set="_navbar_classes" t-valuef="shadow-sm"/>
+                            <div id="top_menu_container"
+                                 class="container justify-content-start justify-content-lg-between">
+                                <!-- Brand -->
+                                <t t-call="website.placeholder_header_brand">
+                                    <t t-set="_link_class" t-valuef="me-4"/>
+                                </t>
+                                <!-- Navbar Collapse -->
+                                <div id="top_menu_collapse"
+                                     class="collapse navbar-collapse order-last order-lg-0">
+                                    <t t-call="website.navbar_nav">
+                                        <t t-set="_nav_class" t-valuef="flex-grow-1"/>
+                                        <!-- Menu -->
+                                        <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                            <t t-call="website.submenu">
+                                                <t t-set="item_class" t-valuef="nav-item"/>
+                                                <t t-set="link_class" t-valuef="nav-link"/>
+                                            </t>
+                                        </t>
+                                        <t t-set="section_class" t-value="'bg-danger'"/>
+                                        <t t-attf-class="#{section_class}">
+                                            <t t-set="item_class" t-valuef="bg-danger"/>
+                                            <!-- Shop Cart -->
+                                            <t t-call="website_sale.header_cart_link">
+                                                <t t-set="_icon" t-value="True"/>
+                                                <t t-set="_item_class" t-value="'nav-item mt-1'"/>
+                                                <t t-set="_link_class" t-value="'nav-link fw-bold'"/>
+                                            </t>
+                                            <!-- Shop Wishlist -->
+                                            <t t-call="website_sale_wishlist.header_wishlist_link">
+                                                <t t-set="_icon" t-value="True"/>
+                                                <t t-set="_item_class" t-value="'nav-item mt-1'"/>
+                                                <t t-set="_link_class" t-value="'nav-link fw-bold'"/>
+                                            </t>
+                                        </t>
+                                        <!-- Sign In -->
+                                        <t t-call="portal.placeholder_user_sign_in">
+                                            <t t-set="_item_class" t-valuef="nav-item ms-lg-auto"/>
+                                            <t t-set="_link_class" t-valuef="nav-link fw-bold"/>
+                                        </t>
+                                        <!-- User Dropdown -->
+                                        <t t-call="portal.user_dropdown">
+                                            <t t-set="_avatar" t-value="true"/>
+                                            <t t-set="_user_name" t-value="false"/>
+                                            <t t-set="_item_class" t-valuef="nav-item dropdown ms-lg-auto"/>
+                                            <t t-set="_link_class" t-valuef="nav-link fw-bold"/>
+                                        </t>
+                                    </t>
+
+                                    <!-- Language Selector -->
+                                    <t t-call="website.placeholder_header_language_selector">
+                                        <t t-set="_div_classes" t-valuef="my-auto ms-lg-2"/>
+                                    </t>
+                                </div>
+                                <!-- Call To Action -->
+                                <t t-call="website.placeholder_header_call_to_action">
+                                    <t t-set="_div_classes" t-valuef="ms-lg-4"/>
+                                </t>
+                                <!-- Navbar Toggler -->
+                                <t t-call="website.navbar_toggler">
+                                    <t t-set="_toggler_class" t-valuef="ms-auto"/>
+                                </t>
+                            </div>
+                        </t>
+                    </header>
+                </xpath>
+            </field>
+        </record>
+    </data>
+    <template id="template_header_weldplanet_align_center" inherit_id="weldplanet_sale.header" active="False">
+        <xpath expr="//t[@t-set='_nav_class']" position="replace">
+            <t t-set="_nav_class" t-valuef="mx-auto"/>
+        </xpath>
+    </template>
+
+    <template id="template_header_weldplanet_align_right" inherit_id="weldplanet_sale.header" active="False">
+        <xpath expr="//t[@t-set='_nav_class']" position="replace">
+            <t t-set="_nav_class" t-valuef="ms-auto"/>
+        </xpath>
+    </template>
+</odoo>

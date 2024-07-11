@@ -1,0 +1,143 @@
+// Header / Navbar Start
+.o_extra_menu_items {
+  .dropdown-menu-start {
+    .dropdown {
+      .dropdown-menu {
+        .dropdown-item {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+}
+// Header / Navbar End
+
+// Product List Page Start
+.oe_website_sale .o_wsale_design_weldplanet {
+  --o-wsale-card-border-width: 1px;
+  --o-wsale-card-border-radius: 8px;
+  --o-wsale-card-info-padding: 8px;
+  --o-wsale-card-bg: #ffffff;
+  --o-wsale-card-color: #1A2942;
+  --o-wsale-card-text-muted: #1A2942;
+  --o-wsale-card-thumb-border-radius: 10px 10px 0 0;
+}
+
+.oe_product .o_wsale_product_grid_wrapper_1_1 .oe_product_cart {
+  border: 1px solid #d8e2ef;
+  box-shadow: 0 4px 10px rgba(39, 42, 84, 0.2);
+}
+.o_wsale_products_item_title a {
+  color: #1A2942 !important;
+  font-weight: bold;
+}
+
+#products_grid:not(.o_wsale_layout_list) {
+  td.oe_product {
+    padding-bottom: 5px;
+
+    .o_wsale_product_btn {
+      position: absolute;
+      top: auto;
+      right: auto;
+      bottom: calc(100% + 8px);
+      left: 8px;
+      z-index: 2;
+    }
+
+    &:not(:hover) .o_wsale_product_btn {
+      opacity: 0;
+    }
+  }
+}
+
+#products_grid.o_wsale_layout_list .oe_product {
+  --o-wsale-card-border-radius: 0;
+  --o-wsale-card-flex-direction: row;
+  --o-wsale-card-info-padding: 0 12px;
+
+  --o-wsale-card-thumb-size: 100px;
+
+  h6, .h6 {
+    font-size: 16px;
+  }
+}
+
+#products_grid.o_wsale_layout_list .oe_product {
+  --o-wsale-card-padding: 0 0 5px;
+}
+
+.o_wsale_design_weldplanet #products_grid.o_wsale_layout_list .oe_product {
+  --o-wsale-card-padding: 5px;
+  --o-wsale-card-info-padding: 8px 12px;
+}
+
+aside#products_grid_before {
+  padding: 10px 10px;
+  border-radius: 8px;
+  border: 1px solid #d8e2ef;
+  box-shadow: 0 4px 10px rgba(39, 42, 84, 0.2);
+  // box-shadow: 0 4px 30px rgba(39, 42, 84, .16);
+  background: #FFFFFF;
+}
+
+.products_header {
+  .input-group {
+    input {
+      background: #FFFFFF !important;
+      border: 1px solid #d8e2ef !important;
+    }
+
+    button {
+      background: #FFFFFF;
+    }
+  }
+
+  .o_pricelist_dropdown {
+    display: none;
+
+    a {
+      display: none;
+    }
+  }
+
+  .o_sortby_dropdown {
+    a {
+      background: #FFFFFF !important;
+      border: 1px solid #d8e2ef !important;
+    }
+  }
+
+  .oe_search_button {
+    border: 1px solid #d8e2ef;
+  }
+}
+
+#product_detail {
+  .input-group {
+    input {
+      background: #FFFFFF !important;
+      border: 1px solid #d8e2ef !important;
+    }
+
+    button {
+      background: #FFFFFF;
+    }
+  }
+
+  .o_pricelist_dropdown {
+    display: none;
+
+    a {
+      display: none;
+    }
+  }
+}
+// Product List Page End
+
+// Seller Page Start
+.o_wsale_product_information {
+  padding: 10px!important;
+}
+// Seller Page End
+

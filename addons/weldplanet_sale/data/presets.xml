@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="template_header_opt" inherit_id="website.snippet_options" name="Header Template - Option">
+            <xpath expr="//we-select[@data-variable='header-template']" position="inside">
+                <we-button title="Weldplanet-header"
+                           data-customize-website-views="weldplanet_sale.header"
+                           data-customize-website-variable="'weldplanet_header'"
+                           data-img="/weldplanet_sale/static/src/img/wbuilder/template_header_opt.svg"/>
+            </xpath>
+        </template>
+        <template id="template_footer_opt" inherit_id="website.snippet_options" name="Footer Template - Option">
+            <xpath expr="//we-select[@data-variable='footer-template']" position="inside">
+                <we-button title="Weldplanet-footer"
+                           data-customize-website-views="weldplanet_sale.footer"
+                           data-customize-website-variable="'weldplanet_footer'"
+                           data-img="/weldplanet_sale/static/src/img/wbuilder/template_footer_opt.svg"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

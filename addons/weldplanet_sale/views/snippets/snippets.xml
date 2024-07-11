@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="snippet_options" inherit_id="website_sale.snippet_options" name="e-commerce snippet options">
+        <xpath expr="//we-button[contains(., 'Cards')]" position="after">
+            <we-button data-select-class="o_wsale_design_weldplanet"
+                       data-customize-website-views="weldplanet_sale.products_design_weldplanet">
+                Weldplanet Card
+            </we-button>
+        </xpath>
+    </template>
+    <template id="weldplanet_search" inherit_id="website.snippets" name="Weldplanet Search">
+        <xpath expr="//div[@id='snippet_effect']//div[@class='o_panel_body']" position="inside">
+            <t t-snippet="weldplanet_sale.s_weldplanet_search" string="Weldplanet Search" sequence="6" t-thumbnail="/weldplanet_sale/static/src/img/snippets_thumbs/s_weldplanet_search.svg" t-forbid-sanitize="form">
+                <keywords>weldplanet, search</keywords>
+            </t>
+        </xpath>
+    </template>
+</odoo>

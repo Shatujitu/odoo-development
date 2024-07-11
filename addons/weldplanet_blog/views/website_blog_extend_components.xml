@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+<template id="opt_blog_post_sidebar_searchbox_display" name="Sidebar Searchbox" inherit_id="website_blog.blog_post_sidebar" active="True" priority="-2">
+    <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
+        <div class="o_wblog_sidebar_block pb-5 mt-4">
+            <t t-call="weldplanet_blog.blogs_nav_copy_for_sidebar_search">
+                <t t-set="search" t-value="original_search or search" />
+            </t>
+        </div>
+        <!-- <div class="oe_structure" id="oe_structure_blog_post_sidebar_2"/> -->
+    </xpath>
+</template>
+
+<template id="opt_blog_post_follow_us_display" name="Share Links" inherit_id="website_blog.blog_post_sidebar" active="True" priority="-1">
+    <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
+        <div class="o_wblog_sidebar_block pb-5">
+            <h6 class="text-uppercase pb-3 mb-4 border-bottom fw-bold">Follow us</h6>
+
+            <div class="follow-us s_social_media text-start no_icon_color o_not_editable" data-snippet="s_social_media" data-name="Social Media" contenteditable="false">
+                <h5 class="s_social_media_title d-none" contenteditable="true">Follow us</h5>
+                <a href="/website/social/facebook" class="s_social_media_facebook" target="_blank">
+                    <i class="fa fa-facebook m-1 o_editable_media"/>
+                </a>
+                <a href="/website/social/twitter" class="s_social_media_twitter" target="_blank">
+                    <i class="fa fa-twitter m-1 o_editable_media"/>
+                </a>
+                <a href="/website/social/linkedin" class="s_social_media_linkedin" target="_blank">
+                    <i class="fa fa-linkedin m-1 o_editable_media"/>
+                </a>
+                <a href="/website/social/instagram" class="s_social_media_instagram" target="_blank">
+                    <i class="fa fa-instagram m-1 o_editable_media"/>
+                </a>
+            </div>
+        </div>
+
+        <!-- <div class="oe_structure" id="oe_structure_blog_post_sidebar_3"/> -->
+    </xpath>
+</template>
+
+<template id="opt_blog_post_latest_blog_display" name="Latest Blogs" inherit_id="website_blog.blog_post_sidebar" active="True" priority="0">
+    <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
+        <div class="o_wblog_sidebar_block pb-5">
+            <h6 class="text-uppercase pb-3 mb-4 border-bottom fw-bold">Latest blog</h6>
+
+            <t t-foreach="latest_blog_posts" t-as="one_blog_post">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="flex-shrink-0">
+                        <div style="width: 128px;height: 100px;">
+                            <t t-call="website.record_cover">
+                                <t t-set="_record" t-value="one_blog_post" />
+                                <t t-set="additionnal_classes" t-value="'rounded shadow-sm overflow-hidden h-100'" />
+                            </t>
+                        </div>
+                    </div>
+
+                    <div class="flex-grow-1 ms-3">
+                        <a t-att-href="'/blog/' + slug(one_blog_post.blog_id) + '/' + slug(one_blog_post)" t-att-title="one_blog_post.name" class="d-block text-decoration-none text-reset">
+                            <div t-field="one_blog_post.short_title" placeholder="Blog Post Title" />
+                        </a> <small t-field="one_blog_post.post_date" class="d-block text-muted" t-options="{'format': 'long', 'date_only': 'true'}" />
+                    </div>
+                </div>
+            </t>
+
+            <!-- <div class="d-flex align-items-center mb-3">
+                <div class="flex-shrink-0">
+                    <img
+                            width="128px" src="http://cms.weldplanet.com/uploads/engineer_cooperation_male_female_technician_maintenance_control_relay_robot_arm_system_welding_with_tablet_laptop_control_quality_operate_process_work_heavy_industry_40_manufacturing_factory_1b1590b4cd.jpg"
+                            alt="engineer-cooperation-male-female-technician-maintenance-control-relay-robot-arm-system-welding-with-tablet-laptop-control-quality-operate-process-work-heavy-industry-40-manufacturing-factory.jpg" class="img-fluid border rounded-2"
+                    />
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <a href="/blog/welding-recommendation-in-the-weld-galaxy-platform" class="d-block text-decoration-none text-reset">
+                        Welding recommendation in the WeldPlanet Platform
+                    </a> <small class="d-block text-muted">April 2022</small>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- <div class="oe_structure" id="oe_structure_blog_post_sidebar_3"/> -->
+    </xpath>
+</template>
+
+<template id="opt_blog_post_tags_display_extend" name="Tags" inherit_id="website_blog.opt_blog_post_tags_display">
+    <xpath expr="//t[@t-if='blog_post.tag_ids']" position="replace">
+        <t t-if="blog_tags">
+            <div class="h5">
+                <t t-foreach="blog_tags" t-as="one_tag">
+                    <a class="badge border post_link text-decoration-none text-primary" t-attf-href="#{blog_url(tag=one_tag.id)}" t-esc="one_tag.name"/>
+                </t>
+            </div>
+        </t>
+    </xpath>
+</template>
+
+</odoo>

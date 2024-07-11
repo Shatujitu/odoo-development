@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="website.default_website" model="website">
+            <field name="logo" type="base64" file="weldplanet_sale/static/src/img/content/logo.png"/>
+        </record>
+    </data>
+</odoo>

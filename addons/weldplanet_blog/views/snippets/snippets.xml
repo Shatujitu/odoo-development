@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="weldplanet_header" inherit_id="website.snippets" name="Weldplanet Header">
+        <xpath expr="//div[@id='snippet_structure']//div[@class='o_panel_body']" position="inside">
+            <t t-snippet="weldplanet_blog.s_weldplanet_header" string="Weldplanet Header" t-thumbnail="/weldplanet_blog/static/src/img/snippets_thumbs/s_weldplanet_header.svg">
+                <keywords>weldplanet, header, title</keywords>
+            </t>
+        </xpath>
+    </template>
+</odoo>

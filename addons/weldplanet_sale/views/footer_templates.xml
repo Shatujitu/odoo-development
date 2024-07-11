@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="footer" model="ir.ui.view">
+            <field name="name">Weldplanet Footer</field>
+            <field name="type">qweb</field>
+            <field name="key">weldplanet_sale.footer</field>
+            <field name="inherit_id" ref="website.layout"/>
+            <field name="mode">extension</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='footer']" position="replace">
+                    <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+                        <section class="s_text_block pt40 pb16" data-snippet="s_text_block" data-name="Text">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-3 pt-2 pb24">
+                                        <a href="/" class="o_footer_logo logo">
+                                            <img src="/weldplanet_sale/static/src/img/content/logo_white.svg"
+                                                 class="img-fluid mx-auto pt-2 pb-3 pe-5" aria-label="Weldplanet Logo"
+                                                 title="Weldplanet" role="img"/>
+                                        </a>
+                                        <p>
+                                            A transparent B2B platform connecting end-users with equipment and consumables manufacturers, suppliers, distributors, and technology and service providers.
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-2 pt24 pb24">
+                                        <h5 class="mb-3">Knowledge Base</h5>
+                                        <hr/>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a href="/">Blog</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Knowledge Pages</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">FAQs</a>
+                                            </li>
+                                            <t t-set="configurator_footer_links" t-value="[]"/>
+                                            <li t-foreach="configurator_footer_links" t-as="link">
+                                                <a t-att-href="link['href']" t-esc="link['text']"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-2 pt24 pb24">
+                                        <h5 class="mb-3">Products</h5>
+                                        <hr/>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a href="/">Product 1</a>
+                                            </li>
+                                            <li>
+                                                <a href="/">Product 2</a>
+                                            </li>
+                                            <li>
+                                                <a href="/">Product 3</a>
+                                            </li>
+                                            <li>
+                                                <a href="/">Product 4</a>
+                                            </li>
+                                            <t t-set="configurator_footer_links" t-value="[]"/>
+                                            <li t-foreach="configurator_footer_links" t-as="link">
+                                                <a t-att-href="link['href']" t-esc="link['text']"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-2 pt24 pb24">
+                                        <h5 class="mb-3">Company</h5>
+                                        <hr/>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a href="/">Our Mission</a>
+                                            </li>
+                                            <li>
+                                                <a href="/">About Us</a>
+                                            </li>
+                                            <li>
+                                                <a href="/contactus">Contact us</a>
+                                            </li>
+                                            <t t-set="configurator_footer_links" t-value="[]"/>
+                                            <li t-foreach="configurator_footer_links" t-as="link">
+                                                <a t-att-href="link['href']" t-esc="link['text']"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="connect" class="col-lg-3 pt24 pb24">
+                                        <h5 class="mb-3">Follow Us</h5>
+                                        <hr/>
+                                        <!--<ul class="list-unstyled">
+                                            <li>
+                                                <i class="fa fa-comment fa-fw me-2"/>
+                                                <span>
+                                                    <a href="/contactus">Contact us</a>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-envelope fa-fw me-2"/>
+                                                <span>
+                                                    <a href="mailto:info@yourcompany.example.com">
+                                                        info@yourcompany.example.com
+                                                    </a>
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-phone fa-fw me-2"/>
+                                                <span class="o_force_ltr">
+                                                    <a href="tel:+1 (650) 555-0111">+1 (650) 555-0111</a>
+                                                </span>
+                                            </li>
+                                        </ul>-->
+                                        <div class="s_social_media text-start o_not_editable"
+                                             data-snippet="s_social_media" data-name="Social Media"
+                                             contenteditable="false">
+                                            <a href="/website/social/facebook" class="s_social_media_facebook"
+                                               target="_blank">
+                                                <i class="fa fa-facebook rounded shadow-sm o_editable_media"/>
+                                            </a>
+                                            <a href="/website/social/twitter" class="s_social_media_twitter"
+                                               target="_blank">
+                                                <i class="fa fa-twitter rounded shadow-sm o_editable_media"/>
+                                            </a>
+                                            <a href="/website/social/linkedin" class="s_social_media_linkedin"
+                                               target="_blank">
+                                                <i class="fa fa-linkedin rounded shadow-sm o_editable_media"/>
+                                            </a>
+                                            <a href="/website/social/youtube" class="s_social_media_youtube"
+                                                target="_blank">
+                                                <i class="fa fa-youtube rounded shadow-sm o_editable_media"/>
+                                            </a>
+                                            <a href="/website/social/pinterest" class="s_social_media_pinterest"
+                                                target="_blank">
+                                                <i class="fa fa-pinterest rounded shadow-sm o_editable_media"/>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
