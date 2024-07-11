@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- ====== Tree View ================================================ -->
+        <record id="view_tvs_project_tree" model="ir.ui.view">
+            <field name="name">tvs.project.tree</field>
+            <field name="model">tvs.project</field>
+            <field name="arch" type="xml">
+                <tree string="Projects Tree View">
+                    <field name="sequence" widget="handle" optional="show"/>
+                    <field name="id" optional="hide"/>
+                    <field name="name" optional="show"/>
+                    <field name="description" optional="hide"/>
+                    <field name="website_link" optional="hide"/>
+                    <field name="partner_ids" optional="show" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ====== Form View ================================================ -->
+        <record id="view_tvs_project_form" model="ir.ui.view">
+            <field name="name">tvs.project.form</field>
+            <field name="model">tvs.project</field>
+            <field name="arch" type="xml">
+                <form string="Project Form View">
+                    <sheet>
+                        <group>
+                            <field name="logo" widget="image" options="{'accepted_file_extensions': '.png'}" class="oe_avatar"/>
+                            <field name="name" placeholder="Project Name"/>
+                            <field name="website_link" placeholder="Website Link"/>
+                            <field name="description" placeholder="Project Description"/>
+                        </group>
+                        <notebook>
+                            <page name="partner_page" string="Partners">
+                                <field name="partner_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Name" optional="show"/>
+                                        <field name="website_link" optional="show"/>
+                                        <field name="logo" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="domain_page" string="Domains">
+                                <field name="domain_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Name" optional="show"/>
+                                        <field name="title" optional="show"/>
+                                        <field name="description" optional="hide"/>
+                                        <field name="banner_image" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ====== Actions ================================================ -->
+        <record id="action_tvs_project" model="ir.actions.act_window">
+            <field name="name">Projects</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tvs.project</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tvs_project_tree')}),
+            ]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No project yet!
+                </p>
+                <p>
+                    Please add a new project!
+                </p>
+            </field>
+        </record>
+        <!-- ====== Menu Items ============================================== -->
+        <menuitem id="menu_tvs_project"
+                  parent="website.menu_content"
+                  sequence="50"
+                  name="Projects"
+                  action="website_tvs_domain.action_tvs_project"/>
+    </data>
+</odoo>

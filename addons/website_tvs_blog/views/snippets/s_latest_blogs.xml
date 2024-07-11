@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Load-time templates (rendered in JS on page load) -->
+    <!-- Card layout -->
+    <!-- Card layout -->
+    <template id="dynamic_filter_template_blog_post_card" name="TVS layout">
+        <div class="s_blog_posts_post s_latest_blog_post pb32 w-100" data-number-of-elements="1">
+            <div class="row">
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                    <t t-set="first_record" t-value="True"/>
+                    <div t-foreach="records" t-as="data">
+                        <t t-set="record" t-value="data['_record']"/>
+                        <t t-if="first_record">
+                            <t t-set="first_record" t-value="False"/>
+                            <div class="feature-blog">
+                                <div>
+                                    <a class="feature-blog-cover-img d-flex shadow-sm overflow-hidden rounded"
+                                       t-att-href="data['call_to_action_url']">
+                                        <t t-call="website.record_cover">
+                                            <t t-set="_record" t-value="record"/>
+                                        </t>
+                                    </a>
+                                    <div class="d-grid gap-3 p-3">
+                                        <div t-if="is_sample" class="h5 o_ribbon_right bg-primary text-uppercase">
+                                            Sample
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="/website_tvs_blog/static/src/img/blog_calender_icon.svg"
+                                                 alt="Calendar Icon" width="16" height="16"/>
+                                            <span class="text-muted" t-field="record.post_date"
+                                                  t-options='{"format": "MMM d, yyyy"}'/>
+                                        </div>
+                                        <div class="feature-blog-title">
+                                            <a t-att-href="data['call_to_action_url']">
+                                                <span t-esc="record.name[:120]"/>
+                                                <t t-if="len(record.name) > 120">
+                                                    <span>...</span>
+                                                </t>
+                                            </a>
+                                        </div>
+                                        <div class="feature-blog-content">
+                                            <h4 t-esc="record.teaser"/>
+                                        </div>
+                                        <div class="feature-blog-tags d-flex flex-wrap gap-3 pb-3 text-capitalize">
+                                            <t t-foreach="record.tag_ids" t-as="tag">
+                                                <span t-field="tag.name"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <t t-set="first_record" t-value="True"/>
+                    <div t-foreach="records" t-as="data">
+                        <t t-set="record" t-value="data['_record']"/>
+                        <t t-if="first_record">
+                            <t t-set="first_record" t-value="False"/>
+                        </t>
+                        <t t-else="">
+                            <div class="other-blogs mb-3">
+                                <div class="d-flex gap-2">
+                                    <a class="other-blog-cover-img d-flex shadow-sm overflow-hidden rounded"
+                                       t-att-href="data['call_to_action_url']">
+                                        <t t-call="website.record_cover">
+                                            <t t-set="_record" t-value="record"/>
+                                        </t>
+                                    </a>
+
+                                    <div class="w-75 p-3 d-grid gap-3">
+                                        <div t-if="is_sample" class="h5 o_ribbon_right bg-primary text-uppercase">
+                                            Sample
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="/website_tvs_blog/static/src/img/blog_calender_icon.svg"
+                                                 alt="Calendar Icon" width="16" height="16"/>
+                                            <span class="text-muted" t-field="record.post_date"
+                                                  t-options='{"format": "MMM d, yyyy"}'/>
+                                        </div>
+                                        <div class="other-blog-title">
+                                            <a t-att-href="data['call_to_action_url']">
+                                                <span t-esc="record.name[:70]"/>
+                                                <t t-if="len(record.name) > 70">
+                                                    <span>...</span>
+                                                </t>
+                                            </a>
+                                        </div>
+                                        <div class="other-blog-tags pb-2 d-flex flex-wrap gap-3 text-capitalize">
+                                            <t t-set="counter" t-value="0"/>
+                                            <t t-foreach="record.tag_ids" t-as="tag">
+                                                <t t-set="counter" t-value="counter + 1"/>
+                                                <t t-if="counter &lt;= 2">
+                                                    <span t-field="tag.name"/>
+                                                </t>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Assets -->
+    <record id="website_tvs_blog.s_latest_blogs_000_scss" model="ir.asset">
+        <field name="name">Latest blogs 000 SCSS</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">website_tvs_blog/static/src/snippets/s_latest_blogs/000.scss</field>
+    </record>
+
+</odoo>

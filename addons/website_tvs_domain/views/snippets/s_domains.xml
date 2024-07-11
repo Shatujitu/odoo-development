@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Snippet -->
+    <template id="s_domains" name="Domains">
+        <t t-call="website.s_dynamic_snippet_template">
+            <t t-set="snippet_name" t-value="'s_domains'"/>
+            <t t-set="snippet_classes" t-value="'s_dynamic_snippet_domains'"/>
+        </t>
+    </template>
+
+    <!-- Load-time templates (rendered in JS on page load) -->
+    <!-- template id must have the format: 'dynamic_filter_template_' + 'model name replace . by _' + 'extra'   -->
+    <!-- Layout -->
+    <template id="dynamic_filter_template_tvs_domain_layout" name="Domain Layout">
+        <div t-foreach="records" t-as="data" class="w-100" data-number-of-elements="1">
+            <t t-set="record" t-value="data['_record']"/>
+            <t t-if="record">
+                <div class="row s_domains_section m-0">
+                    <div class="col-md-6 s_domains_banner_img p-0">
+                        <img t-if="record.banner_image"
+                             t-att-src="'data:image/png;base64,' + record.banner_image.decode('utf-8')"/>
+                        <div class="overlay"/>
+                    </div>
+                    <div class="col-md-6 p-4 d-grid align-content-between">
+                        <div class="s_domains_text">
+                            <div class="domain-title pt-2" t-if="record.title">
+                                <h3 t-field="record.title"/>
+                            </div>
+                            <div class="short-description pt-2" t-if="record.get_short_description()">
+                                <h6 class="short-description-content" t-esc="record.get_short_description()"/>
+                            </div>
+                            <div class="full-description pt-2 d-none" t-if="record.description">
+                                <h6 t-field="record.description"/>
+                            </div>
+                        </div>
+                        <div class="pt-2" t-if="record.get_short_description()">
+                            <a href="#" class="toggle-description">View More <span class="arrow-down">&#x2193;</span></a>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </template>
+
+    <!-- Options -->
+    <template id="s_domains_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <t t-call="website_tvs_domain.s_domains_options_template">
+                <t t-set="snippet_name" t-value="'dynamic_snippet_domains'"/>
+                <t t-set="snippet_selector" t-value="'.s_dynamic_snippet_domains'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="s_domains_options_template" inherit_id="website.s_dynamic_snippet_options_template">
+        <xpath expr="//we-select[@data-name='filter_opt']" position="after">
+            <we-select t-if="snippet_name == 'dynamic_snippet_domains'" string="Domain" data-no-preview="true"
+                       data-name="domain_opt" data-attribute-name="filterByDomainId">
+                <we-button data-select-data-attribute="-1">All domains</we-button>
+                <!-- the blog list will be generated in js -->
+            </we-select>
+        </xpath>
+    </template>
+
+    <!-- Assets -->
+    <record id="website_tvs_domain.s_domains_000_scss" model="ir.asset">
+        <field name="name">Domain 000 SCSS</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">website_tvs_domain/static/src/snippets/s_domains/000.scss</field>
+    </record>
+
+    <record id="website_tvs_domain.s_domains_000_js" model="ir.asset">
+        <field name="name">Domain 000 JS</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">website_tvs_domain/static/src/snippets/s_domains/000.js</field>
+    </record>
+</odoo>

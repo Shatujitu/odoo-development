@@ -1,0 +1,12 @@
+.s_back_button {
+  button {
+    border-radius: 20px;
+    background: linear-gradient(270deg, #324AA6 0%, #2CB6F9 100%);
+    box-shadow: 0px 4px 8px 0px rgba(26, 41, 66, 0.14);
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(270deg, #2CB6F9 0%, #324AA6 100%); /* Reversed gradient colors on hover */
+    }
+  }
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- ====== Tree View ================================================ -->
+        <record id="view_tvs_domain_tree" model="ir.ui.view">
+            <field name="name">tvs.domain.tree</field>
+            <field name="model">tvs.domain</field>
+            <field name="arch" type="xml">
+                <tree string="Domains Tree View">
+                    <field name="id" optional="hide"/>
+                    <field name="sequence" widget="handle" optional="show"/>
+                    <field name="name" optional="show"/>
+                    <field name="title" optional="show"/>
+                    <field name="description" optional="hide"/>
+                    <field name="sub_domain_ids" optional="show"/>
+                    <field name="project_ids" optional="show" widget="many2many_tags"/>
+                    <field name="topic_ids" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ====== Form View ================================================ -->
+        <record id="view_tvs_domain_form" model="ir.ui.view">
+            <field name="name">tvs.domain.form</field>
+            <field name="model">tvs.domain</field>
+            <field name="arch" type="xml">
+                <form string="Domain Form View">
+                    <sheet>
+                        <group>
+                            <field name="banner_image" widget="image" options="{'accepted_file_extensions': '.jpg,.jpeg,.png,.webp,.gif'}" class="oe_avatar"/>
+                            <field name="name" placeholder="Domain Name"/>
+                            <!--                            <field name="slug" placeholder="Domain Slug"/>-->
+                            <field name="title" placeholder="Domain Title"/>
+                            <field name="description" placeholder="Domain Description"/>
+                        </group>
+                        <group>
+                            <button name="open_page_button" string="Open Page" type="object" icon="fa-external-link" class="oe_highlight btn btn-primary"/>
+                        </group>
+                        <notebook>
+                            <page name="sub_domain_page" string="Sub Domains">
+                                <field name="sub_domain_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Name" optional="show"/>
+                                        <field name="title" optional="show"/>
+                                        <field name="description" optional="hide"/>
+                                        <field name="banner_image" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="project_page" string="Projects">
+                                <field name="project_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Name" optional="show"/>
+                                        <field name="website_link" optional="show"/>
+                                        <field name="logo" widget="image" class="oe_avatar" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="topic_page" string="Topics">
+                                <field name="topic_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="title" string="Title" optional="show"/>
+                                        <field name="icon" widget="image" class="oe_avatar" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ====== Actions ================================================ -->
+        <record id="action_tvs_domain" model="ir.actions.act_window">
+            <field name="name">Domains</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tvs.domain</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tvs_domain_tree')}),
+            ]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No domain yet!
+                </p>
+                <p>
+                    Please add a new domain!
+                </p>
+            </field>
+        </record>
+        <!-- ====== Menu Items ============================================== -->
+        <menuitem id="menu_tvs_domain"
+                  parent="website.menu_content"
+                  sequence="40"
+                  name="Domains"
+                  action="website_tvs_domain.action_tvs_domain"/>
+    </data>
+</odoo>
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- ====== Tree View ================================================ -->
+        <record id="view_tvs_topic_tree" model="ir.ui.view">
+            <field name="name">tvs.topic.tree</field>
+            <field name="model">tvs.topic</field>
+            <field name="arch" type="xml">
+                <tree string="Topics Tree View">
+                    <field name="sequence" widget="handle" optional="show"/>
+                    <field name="id" optional="hide"/>
+                    <field name="title" optional="show"/>
+                    <field name="description" optional="hide"/>
+                    <field name="domain_ids" optional="show" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ====== Form View ================================================ -->
+        <record id="view_tvs_topic_form" model="ir.ui.view">
+            <field name="name">tvs.topic.form</field>
+            <field name="model">tvs.topic</field>
+            <field name="arch" type="xml">
+                <form string="Topic Form View">
+                    <sheet>
+                        <group>
+                            <field name="icon" widget="image" options="{'accepted_file_extensions': '.svg'}" class="oe_avatar"/>
+                            <field name="title" placeholder="Topic Name"/>
+                            <field name="description" placeholder="Topic Description"/>
+                        </group>
+                        <notebook>
+                            <page name="domain_page" string="Domains">
+                                <field name="domain_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Name" optional="show"/>
+                                        <field name="title" optional="show"/>
+                                        <field name="description" optional="hide"/>
+                                        <field name="banner_image" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ====== Actions ================================================ -->
+        <record id="action_tvs_topic" model="ir.actions.act_window">
+            <field name="name">Topics</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tvs.topic</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tvs_topic_tree')}),
+            ]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No topic yet!
+                </p>
+                <p>
+                    Please add a new topic!
+                </p>
+            </field>
+        </record>
+        <!-- ====== Menu Items ============================================== -->
+        <menuitem id="menu_tvs_topic"
+                  parent="website.menu_content"
+                  sequence="70"
+                  name="Topics"
+                  action="website_tvs_domain.action_tvs_topic"/>
+    </data>
+</odoo>

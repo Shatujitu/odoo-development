@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="tvs_domain_list_page">
+        <t t-call="website.layout" name="Domain List">
+            <div class="container">
+                <t t-foreach="all_domains" t-as="domain">
+                    <a t-attf-href="/domain/#{domain.slug}">
+                        <t t-esc="domain.name"/>
+                    </a>
+                </t>
+            </div>
+            <div class="oe_structure oe_empty">
+            </div>
+        </t>
+    </template>
+</odoo>

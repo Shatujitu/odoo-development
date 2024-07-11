@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Snippet -->
+    <template id="s_projects" name="Domain Projects">
+        <t t-call="website.s_dynamic_snippet_template">
+            <t t-set="snippet_name" t-value="'s_projects'"/>
+            <t t-set="snippet_classes" t-value="'s_dynamic_snippet_projects'"/>
+        </t>
+    </template>
+
+    <!-- Load-time templates (rendered in JS on page load) -->
+    <!-- template id must have the format: 'dynamic_filter_template_' + 'model name replace . by _' + 'extra'   -->
+    <!-- Layout -->
+    <template id="dynamic_filter_template_tvs_project_layout" name="Project Layout">
+        <div t-foreach="records" t-as="data" class="w-100 d-grid" data-number-of-elements="4">
+            <t t-set="record" t-value="data['_record']"/>
+            <div class="s_projects_section">
+                <div class="s_projects_logo" data-bs-toggle="modal" t-attf-data-bs-target="#project-{{record.id}}">
+                    <img t-if="record.logo" t-att-src="'data:image/png;base64,' + record.logo.decode('utf-8')"/>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" t-attf-id="project-{{record.id}}" tabindex="-1"
+                     aria-labelledby="projectModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header p-4">
+                                <img t-if="record.logo"
+                                     t-att-src="'data:image/png;base64,' + record.logo.decode('utf-8')"/>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-text p-4">
+                                    <t t-esc="record.description"/>
+                                </div>
+                                <div class="modal-partner p-4">
+                                    <h4 t-if="record.partner_ids">Consortium Partners:</h4>
+                                    <div class="row d-flex justify-content-start">
+                                        <div class="col-6 col-md-3" t-foreach="record.partner_ids" t-as="partner">
+                                            <div class="modal-partner-each p-2 my-2 d-flex justify-content-center align-items-center">
+                                                <img t-if="partner.logo"
+                                                 t-att-src="'data:image/png;base64,' + partner.logo.decode('utf-8')"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4" t-if="record.website_link">
+                                    <a  t-attf-href="{{ record.website_link }}" target="_blank">
+                                        <span>Visit Website</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </template>
+
+    <!-- Options -->
+    <template id="s_projects_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <t t-call="website_tvs_domain.s_projects_options_template">
+                <t t-set="snippet_name" t-value="'dynamic_snippet_projects'"/>
+                <t t-set="snippet_selector" t-value="'.s_dynamic_snippet_projects'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="s_projects_options_template" inherit_id="website.s_dynamic_snippet_options_template">
+        <xpath expr="//we-select[@data-name='filter_opt']" position="after">
+            <we-select t-if="snippet_name == 'dynamic_snippet_projects'" string="Domain" data-no-preview="true"
+                       data-name="domain_opt" data-attribute-name="filterByDomainId">
+                <we-button data-select-data-attribute="-1">All projects</we-button>
+                <!-- the blog list will be generated in js -->
+            </we-select>
+        </xpath>
+    </template>
+
+    <!-- Assets -->
+    <record id="website_tvs_domain.s_projects_000_scss" model="ir.asset">
+        <field name="name">Projects 000 SCSS</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">website_tvs_domain/static/src/snippets/s_projects/000.scss</field>
+    </record>
+    <record id="website_tvs_domain.s_projects_000_js" model="ir.asset">
+        <field name="name">Projects 000 JS</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">website_tvs_domain/static/src/snippets/s_projects/000.js</field>
+    </record>
+</odoo>

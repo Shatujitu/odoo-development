@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- ====== Tree View ================================================ -->
+        <record id="view_college_info_tree" model="ir.ui.view">
+            <field name="name">college.info.tree</field>
+            <field name="model">college.info</field>
+            <field name="arch" type="xml">
+                <tree string="College Info">
+                    <field name="id" optional="hide"/>
+                    <field name="name" optional="show"/>
+                    <field name="address" optional="show"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ====== Form View ================================================ -->
+        <record id="view_college_info_form" model="ir.ui.view">
+            <field name="name">college.info.form</field>
+            <field name="model">college.info</field>
+            <field name="arch" type="xml">
+                <form string="College Info">
+                    <sheet>
+                        <group name="college_info">
+                            <field name="name" placeholder="College Name"/>
+                            <field name="address" placeholder="College Address"/>
+                        </group>
+                        <notebook>
+                            <page name="student_page" string="Students">
+                                <field name="student_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Name" optional="show"/>
+                                        <field name="age" optional="show"/>
+                                        <field name="group" optional="show"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ====== Actions ================================================ -->
+        <record id="action_college_info" model="ir.actions.act_window">
+            <field name="name">College Info</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">college.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_college_info_tree')}),
+            ]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No college yet!
+                </p>
+                <p>
+                    Please add a new college!
+                </p>
+            </field>
+        </record>
+        <!-- ====== Menu Items ============================================== -->
+        <menuitem id="menu_college_info"
+            parent="website.menu_content"
+            sequence="40"
+            name="Colleges"
+            action="website_student.action_college_info"/>
+    </data>
+</odoo>
+

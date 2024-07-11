@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="website_tvs_blog_snippets" inherit_id="website.snippets" name="Blog Snippet">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_structure" class="o_panel">
+                <div class="o_panel_header">TVS Blogs</div>
+                <div class="o_panel_body">
+                    <t t-snippet="website_tvs_blog.s_latest_blogs" string="Latest News" t-thumbnail="/website_tvs_blog/static/src/img/snippets_thumbs/s_latest_blogs.svg">
+                        <keywords>tvs, latest, blog</keywords>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Filters for Dynamic Filter -->
+        <record id="dynamic_snippet_student_filter" model="ir.filters">
+            <field name="name">Students</field>
+            <field name="model_id">student.profile</field>
+        </record>
+        <!-- Dynamic Filter -->
+        <record id="dynamic_filter_student" model="website.snippet.filter">
+            <field name="name">Students</field>
+            <field name="filter_id" ref="website_student.dynamic_snippet_student_filter"/>
+            <field name="field_names">name</field>
+            <field name="limit" eval="8"/>
+        </record>
+    </data>
+</odoo>

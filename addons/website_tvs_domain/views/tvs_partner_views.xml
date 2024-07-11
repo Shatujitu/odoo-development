@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- ====== Tree View ================================================ -->
+        <record id="view_tvs_partner_tree" model="ir.ui.view">
+            <field name="name">tvs.partner.tree</field>
+            <field name="model">tvs.partner</field>
+            <field name="arch" type="xml">
+                <tree string="Partners Tree View">
+                    <field name="sequence" widget="handle" optional="show"/>
+                    <field name="id" optional="hide"/>
+                    <field name="name" optional="show"/>
+                    <field name="website_link" optional="hide"/>
+                    <field name="project_ids" optional="show" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ====== Form View ================================================ -->
+        <record id="view_tvs_partner_form" model="ir.ui.view">
+            <field name="name">tvs.partner.form</field>
+            <field name="model">tvs.partner</field>
+            <field name="arch" type="xml">
+                <form string="Partner Form View">
+                    <sheet>
+                        <group>
+                            <field name="logo" widget="image" options="{'accepted_file_extensions': '.png'}" class="oe_avatar"/>
+                            <field name="name" placeholder="Partner Name"/>
+                            <field name="website_link" placeholder="Website Link"/>
+                        </group>
+                        <notebook>
+                            <page name="project_page" string="Projects">
+                                <field name="project_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Name" optional="show"/>
+                                        <field name="website_link" optional="show"/>
+                                        <field name="logo" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ====== Actions ================================================ -->
+        <record id="action_tvs_partner" model="ir.actions.act_window">
+            <field name="name">Partners</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tvs.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tvs_partner_tree')}),
+            ]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No partner yet!
+                </p>
+                <p>
+                    Please add a new partner!
+                </p>
+            </field>
+        </record>
+        <!-- ====== Menu Items ============================================== -->
+        <menuitem id="menu_tvs_partner"
+                  parent="website.menu_content"
+                  sequence="60"
+                  name="Partners"
+                  action="website_tvs_domain.action_tvs_partner"/>
+    </data>
+</odoo>

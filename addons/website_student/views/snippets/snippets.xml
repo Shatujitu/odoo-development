@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="snippet" inherit_id="website.snippets" name="Snippet Student">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_structure" class="o_panel">
+                <div class="o_panel_header">Student Snippets</div>
+                <div class="o_panel_body">
+                    <t t-snippet="website_student.s_student_profile" string="Student Profile"
+                        t-thumbnail="/website_student/static/src/img/snippets_thumbs/s_student_profile.svg">
+                        <keywords>student, profile</keywords>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

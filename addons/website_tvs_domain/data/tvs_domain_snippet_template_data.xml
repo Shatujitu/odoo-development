@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Filters for Dynamic Filter -->
+        <record id="dynamic_snippet_domain_filter" model="ir.filters">
+            <field name="name">Domains</field>
+            <field name="model_id">tvs.domain</field>
+        </record>
+        <record id="dynamic_snippet_project_filter" model="ir.filters">
+            <field name="name">Projects</field>
+            <field name="model_id">tvs.project</field>
+        </record>
+        <record id="dynamic_snippet_topic_filter" model="ir.filters">
+            <field name="name">Topics</field>
+            <field name="model_id">tvs.topic</field>
+        </record>
+        <!-- Dynamic Filter -->
+        <record id="dynamic_filter_domains" model="website.snippet.filter">
+            <field name="name">Domains</field>
+            <field name="filter_id" ref="website_tvs_domain.dynamic_snippet_domain_filter"/>
+            <field name="field_names">name,banner_image</field>
+            <field name="limit" eval="12"/>
+        </record>
+        <record id="dynamic_filter_projects" model="website.snippet.filter">
+            <field name="name">Projects</field>
+            <field name="filter_id" ref="website_tvs_domain.dynamic_snippet_project_filter"/>
+            <field name="field_names">name,logo</field>
+            <field name="limit" eval="16"/>
+        </record>
+        <record id="dynamic_filter_topics" model="website.snippet.filter">
+            <field name="name">Topics</field>
+            <field name="filter_id" ref="website_tvs_domain.dynamic_snippet_topic_filter"/>
+            <field name="field_names">title,description,icon</field>
+            <field name="limit" eval="12"/>
+        </record>
+    </data>
+</odoo>

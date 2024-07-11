@@ -1,0 +1,287 @@
+.event-breadcrumbs {
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .img-overly {
+    width: 100%;
+    height: 160px;
+    background: #195BC0;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 1;
+  }
+}
+
+.event-header {
+  background: url("../img/event_menu_bg.jpg") no-repeat center;
+  background-size: cover;
+
+  h1 {
+    color: #249AFB;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 113%; /* 45.2px */
+  }
+}
+
+.event-tag {
+  font-family: Raleway, sans-serif;
+}
+
+.btn-tag {
+  color: inherit;
+  background: inherit;
+}
+
+.date-title {
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  position: relative;
+}
+
+.date-title-text {
+  background: var(--body-bg);
+  padding-right: 10px;
+  z-index: 1;
+}
+
+.date-title-line {
+  background: #000;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 1px;
+  z-index: 0;
+}
+
+.event-card {
+  border-radius: 20px;
+  box-shadow: 0px 2px 16px 0px rgba(54, 124, 193, 0.50);
+}
+
+.card-img {
+  position: relative;
+
+  img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .img-overly {
+    width: 100%;
+    aspect-ratio: 3/2;
+    background: #195BC0;
+    opacity: 0.6;
+    border-radius: 20px;
+    position: absolute;
+    z-index: 1;
+  }
+
+}
+
+.card-title {
+  color: #293896;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.card-venue span {
+  color: #293896;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.event-details-title {
+  color: #0D1728;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 43px;
+  // text-align: justify;
+}
+
+.event-details-content {
+  text-align: justify;
+}
+
+.event-details-note {
+  background: #F6F8FC;
+  border-left: 2px solid #0549B1;
+  padding: 15px 30px;
+  color: #0D1728;
+  text-align: justify;
+  font-family: Raleway, sans-serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.event-details-speaker-card {
+  width: 100%;
+  border-radius: 20px;
+  background: #FFF;
+  box-shadow: 0px 2px 16px 0px rgba(54, 124, 193, 0.50);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.event-details-speaker-img {
+  img {
+    // width: 80px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+  }
+}
+
+.event-details-speaker-name {
+  color: #0D1728;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.event-details-speaker-designation {
+  color: #0D1728;
+  font-family: Raleway, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.modal-img {
+  img {
+    width: 80px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+  }
+}
+
+.modal-speaker-name {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: justify;
+  color: #0D1728;
+}
+
+.modal-speaker-designation {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: justify;
+  color: #0D1728;
+}
+
+.modal-bio {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: justify;
+  color: #0D1728;
+}
+
+.event-details-card {
+  border-radius: 20px;
+  background: #FFF;
+  box-shadow: 0px 2px 16px 0px rgba(54, 124, 193, 0.50);
+}
+
+.event-details-card-img {
+  position: relative;
+
+  img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: 20px 20px 0px 0px;
+  }
+
+  .img-overly {
+    width: 100%;
+    aspect-ratio: 3/2;
+    background: #195BC0;
+    opacity: 0.6;
+    border-radius: 20px 20px 0px 0px;
+    position: absolute;
+    z-index: 1;
+  }
+}
+
+.event-details-card-status {
+  color: #293896;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.event-details-card-datetime {
+  padding-left: 10px;
+  border-left: 2px solid #293896;;
+}
+
+.event-details-card-date {
+  color: #293896;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px; /* 127.273% */
+}
+
+.event-details-card-time {
+  color: #0D1728;
+  font-family: Raleway, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 140% */
+}
+
+.event-details-card-timezone {
+  color: #0D1728;
+  font-family: Raleway, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 140% */
+}
+
+.event-details-card-venue span {
+  color: #293896;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (min-width: 992px) {
+  .default-padding {
+    padding: 0 200px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .default-padding {
+    padding: 0 250px !important;
+  }
+}

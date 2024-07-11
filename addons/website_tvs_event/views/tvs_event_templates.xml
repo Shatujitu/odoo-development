@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="tvs_event_list_page" name="Event list page">
+        <t t-call="website.layout">
+            <!--<div class="event-breadcrumbs">
+                <div class="img-overly"></div>
+                <img src="/website_tvs_event/static/src/img/event_breadcrumbs_img.png" alt="breadcrumbs_img"/>
+            </div>-->
+            <div class="event-header py-4">
+                <h1>Events</h1>
+            </div>
+
+            <div class="container">
+                <div class="default-padding px-0 px-md-5">
+                    <div class="py-4 d-flex flex-wrap gap-2 event-tag">
+                        <a href="/event/all" t-att-class="'btn-tag btn btn-primary' + (' active' if request.httprequest.path == '/event/all' else '')" role="button">All Events</a>
+                        <a href="/event/upcoming" t-att-class="'btn-tag btn btn-primary' + (' active' if request.httprequest.path == '/event/upcoming' else '')" role="button">Upcoming</a>
+                        <a href="/event/past" t-att-class="'btn-tag btn btn-primary' + (' active' if request.httprequest.path == '/event/past' else '')" role="button">Past</a>
+                        <t t-foreach="tags" t-as="tag">
+                            <a t-attf-href="/event/tag/#{tag.id}" t-att-class="'btn-tag btn btn-primary' + (' active' if request.httprequest.path == '/event/tag/' + str(tag.id) else '')" role="button">
+                                <t t-esc="tag.name"/>
+                            </a>
+                        </t>
+                    </div>
+                    <div class="pb-4">
+                        <t t-if="events">
+                            <t t-set="unique_month_years" t-value="[]"/>
+                            <t t-foreach="events" t-as="event">
+                                <div class="py-2">
+                                    <t t-set="month_year" t-value="event.datetime.strftime('%b %Y')"/>
+                                    <t t-if="month_year not in unique_month_years">
+                                        <div class="py-2 date-title">
+                                            <div class="date-title-text">
+                                                <t t-esc="event.datetime.strftime('%B %Y')"/>
+                                            </div>
+                                            <div class="date-title-line"></div>
+                                        </div>
+                                        <t t-set="unique_month_years" t-value="unique_month_years + [month_year]"/>
+                                    </t>
+                                </div>
+                                <div class="p-3 event-card">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-4">
+                                            <div class="card-img">
+                                                <div class="img-overly"></div>
+                                                <img
+                                                        t-attf-src="data:image/*;base64,{{event.banner_image}}"
+                                                        t-options="{'widget': 'image'}"
+                                                        class="w-100"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-8 d-grid justify-content-between gap-1">
+                                            <div class="d-flex gap-5 pt-3 pt-sm-0">
+                                                <div>
+                                                    <img src="/website_tvs_event/static/src/img/event_calender_icon.svg"
+                                                         alt="calender_icon" class="mb-1"/>
+                                                    <t t-esc="event.datetime.strftime('%d %B %Y')"/>
+                                                </div>
+                                                <div>
+                                                    <img src="/website_tvs_event/static/src/img/event_clock_icon.svg"
+                                                         alt="clock_icon" class="mb-1"/>
+                                                    <t t-esc="event.time"/>
+                                                </div>
+                                            </div>
+                                            <div class="card-title">
+                                                <a t-attf-href="/event/#{event.id}">
+                                                    <t t-esc="event.title"/>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <t t-esc="event.content[:120] + '...' if len(event.content) > 120 else event.content"/>
+                                            </div>
+                                            <div class="card-venue">
+                                                <span>Venue:</span>
+                                                <t t-esc="event.venue"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <div class="d-flex justify-content-center py-5">
+                                <h1>No Event Found !!!</h1>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="tvs_event_details_page" name="Event Details Page">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="event-header py-4">
+                    <h1>Events Details</h1>
+                </div>
+                <div class="container">
+                    <div class="row py-4">
+                        <div class="col-12 col-lg-9 order-2 order-lg-1">
+                            <div class="event-details-title pb-4">
+                                <t t-esc="event.title"/>
+                            </div>
+                            <div class="event-details-content">
+                                <t t-esc="event.content"/>
+                            </div>
+                            <div class="event-details-note my-3">
+                                <t t-esc="event.note"/>
+                            </div>
+                            <div class="event-details-speakers">
+                                <t t-if="event.speaker_ids">
+                                    <div>
+                                        <h4>Speakers Details:</h4>
+                                    </div>
+                                    <div class="row">
+                                        <t t-foreach="event.speaker_ids" t-as="speaker">
+                                            <div class="col-12 col-md-6 col-lg-4 px-4 py-2 d-flex justify-content-between">
+                                                <div class="row px-2 py-4 event-details-speaker-card"
+                                                     data-bs-toggle="modal"
+                                                     t-att-data-bs-target="'#speakerModal-' + str(speaker.id)">
+                                                    <div class="col-4 event-details-speaker-img">
+                                                        <img
+                                                                t-attf-src="data:image/*;base64,{{speaker.profile_image}}"
+                                                                t-options="{'widget': 'image'}"
+                                                                class="w-100"/>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="event-details-speaker-name">
+                                                            <t t-esc="speaker.name"/>
+                                                        </div>
+                                                        <div class="event-details-speaker-designation">
+                                                            <t t-esc="speaker.designation"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal fade" t-att-id="'speakerModal-' + str(speaker.id)"
+                                                     tabindex="-1"
+                                                     role="dialog" aria-labelledby="eventModalLabel"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="d-flex justify-content-between px-4 pt-4">
+                                                                <div class="d-flex gap-2">
+                                                                    <div class="modal-img">
+                                                                        <img
+                                                                                t-attf-src="data:image/*;base64,{{speaker.profile_image}}"
+                                                                                t-options="{'widget': 'image'}"
+                                                                        />
+                                                                    </div>
+                                                                    <div class="d-grid align-content-center">
+                                                                        <div class="modal-speaker-name">
+                                                                            <t t-esc="speaker.name"/>
+                                                                        </div>
+                                                                        <div class="modal-speaker-designation">
+                                                                            <t t-esc="speaker.designation"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="">
+                                                                    <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="modal-bio p-3">
+                                                                    <t t-esc="speaker.description"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </t>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 order-1 order-lg-2 pb-3 pb-lg-0">
+                            <div class="event-details-card">
+                                <div class="event-details-card-img">
+                                    <div class="img-overly"></div>
+                                    <img
+                                            t-attf-src="data:image/*;base64,{{event.banner_image}}"
+                                            t-options="{'widget': 'image'}"
+                                    />
+                                </div>
+                                <div class="d-grid gap-2 p-3">
+                                    <div class="event-details-card-status">
+                                        <t t-esc="event.reg_status"></t>
+                                    </div>
+                                    <div class="event-details-card-datetime">
+                                        <div class="event-details-card-date">
+                                            <t t-esc="event.datetime.strftime('%d %B %Y')"></t>
+                                        </div>
+                                        <div class="event-details-card-time">
+                                            <t t-esc="event.time"></t>
+                                        </div>
+                                        <div class="event-details-card-timezone">
+                                            <t t-esc="event.timezone"></t>
+                                        </div>
+                                    </div>
+                                    <div class="event-details-card-venue">
+                                        <span>Venue:</span>
+                                        <t t-esc="event.venue"/>
+                                    </div>
+                                    <div>
+                                        <a t-attf-href = "#{event.link}" target="_blank" type="button" class="btn btn-primary" >
+                                            <t t-foreach="event.button_id" t-as="button">
+                                                <t t-esc="button.name"></t>
+                                            </t>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

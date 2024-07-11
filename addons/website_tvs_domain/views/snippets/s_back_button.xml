@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Snippet -->
+    <template id="s_back_button" name="Back Button">
+        <section class="s_back_button pb-5">
+            <div class="container">
+                <button class="btn btn-primary" onclick="window.history.back();"><span>&#8656;</span> Go Back</button>
+            </div>
+        </section>
+    </template>
+
+    <!-- Assets -->
+    <record id="website_tvs_domain.s_back_button_000_scss" model="ir.asset">
+        <field name="name">Back Button 000 SCSS</field>
+        <field name="bundle">web.assets_frontend</field>
+        <field name="path">website_tvs_domain/static/src/snippets/s_back_button/000.scss</field>
+    </record>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tvs_domain,tvs.domain,model_tvs_domain,,1,1,1,1
+access_tvs_topic,tvs.topic,model_tvs_topic,,1,1,1,1
+access_tvs_project,tvs.project,model_tvs_project,,1,1,1,1
+access_tvs_partner,tvs.partner,model_tvs_partner,,1,1,1,1

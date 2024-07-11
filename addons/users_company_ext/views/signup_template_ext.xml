@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="signup_fields_ext" inherit_id="auth_signup.fields" name="Auth Signup blood_group form field">
+        <xpath expr="//div[last()]" position="after">
+            <div class="mb-3 field-blood_group">
+                <label for="blood_group">Blood Group</label>
+                <input type="char" name="blood_group" id="blood_group" class="form-control form-control-sm" />
+            </div>
+        </xpath>
+    </template>
+</odoo>

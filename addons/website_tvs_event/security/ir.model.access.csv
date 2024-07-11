@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tvs_event,tvs.event,model_tvs_event,,1,1,1,1
+access_tvs_event_speaker,tvs.event.speaker,model_tvs_event_speaker,,1,1,1,1
+access_tvs_event_tag,tvs.event.tag,model_tvs_event_tag,,1,1,1,1
+access_tvs_event_button,tvs.event.button,model_tvs_event_button,,1,1,1,1

@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="view_res_users_extension_form" model="ir.ui.view">
+            <field name="name">res.users.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='login']" position="after">
+                        <group>
+                            <field name="name" />
+                            <field name="email" />
+                            <field name="blood_group" string="Blood Group"/>
+                            <field name="gender" string="Gender"/>
+                        </group>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>
