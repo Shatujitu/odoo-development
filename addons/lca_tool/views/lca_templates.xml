@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <template id="get_lca" name="LCA Tool">
+            <t t-call="website.layout">
+                <t t-set="title">LCA Tool</t>
+                <t t-set="head">
+                    <t t-call-assets="web.assets_frontend"/>
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"/>
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.17/jspdf.plugin.autotable.min.js"/>
+                    <t t-call-assets="lca_tool.assets_lca"/>
+                </t>
+                <div class="oe_structure">
+                    <div id="lca_public"/>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

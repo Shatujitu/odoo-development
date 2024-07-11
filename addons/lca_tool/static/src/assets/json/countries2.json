@@ -1,0 +1,32 @@
+[
+  {
+    "groupName": "Europe",
+    "countries": [
+      {
+        "name": "Afghanistan",
+        "code": "AF",
+        "phone_code": "+93"
+      },
+      {
+        "name": "Albania",
+        "code": "AL",
+        "phone_code": "+355"
+      }
+    ]
+  },
+  {
+    "groupName": "Asia",
+    "countries": [
+      {
+        "name": "Bangladesh",
+        "code": "BN",
+        "phone_code": "+88"
+      },
+      {
+        "name": "India",
+        "code": "IN",
+        "phone_code": "+39"
+      }
+    ]
+  }
+]

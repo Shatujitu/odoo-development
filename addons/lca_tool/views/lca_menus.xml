@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="lca_menus" model="website.menu">
+            <field name="name">LCA Tool</field>
+            <field name="website_id">1</field>
+            <field name="parent_id" search="[ ('url', '=', '/default-main-menu'),
+                                              ('website_id', '=', 1)]"/>
+            <field name="sequence" type="int">10</field>
+            <field name="url">/lca-tool</field>
+        </record>
+    </data>
+</odoo>

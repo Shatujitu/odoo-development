@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+   <t t-name="lca_tool.lca_report" owl="1">
+       <Loader loading="state.loading"/>
+
+            <div class="sub-assembly-inputs w-100 my-5">
+                <div class="d-flex justify-content-end pb-5">
+                    <div class="form-group w-25">
+                        <select class="form-control p-2" id="methodologySelect2" t-model="state.method">
+                            <option value="" style="display: none;">Select a methodology</option>
+                            <t t-foreach="props.state.methodologies" t-as="methodGroup" t-key="methodGroup_index">
+                                <optgroup t-att-label="methodGroup.category">
+                                    <t t-foreach="methodGroup.methods" t-as="method" t-key="method_index">
+                                        <option t-att-value="method" t-esc="method" t-att-selected="method==state.method">
+                                        </option>
+                                    </t>
+                                </optgroup>
+                            </t>
+                        </select>
+                    </div>
+                </div>
+                <t t-if="!state.loading">
+                    <div class="lca-text-primary text-center">
+                        <h1><strong>LCA REPORT</strong></h1>
+                    </div>
+                    <div class="lci-data">
+                        <div class="py-3">
+                            <h2>User input for material and energy </h2>
+                        </div>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-assembly-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-assembly" type="button" role="tab"
+                                        aria-controls="nav-assembly" aria-selected="true">
+                                        <t t-esc="state.lca_result.lci_data.assembly_name"/>
+                                </button>
+                                <t t-foreach="state.lca_result.lci_data.sub_assemblies" t-as="lci" t-key="lci_index">
+                                    <button class="nav-link" type="button" role="tab"
+                                            t-att-id="'nav-' + lci_index + '-tab'"
+                                            t-att-data-bs-toggle="'tab'"
+                                            t-att-data-bs-target="'#nav-' + lci_index"
+                                            t-att-aria-controls="'nav-' + lci_index"
+                                            t-att-aria-selected="lci_index == 0 ? 'true' : 'false'">
+        <!--                                    t-att-class="lci_index == 0 ? 'active' : ''" >-->
+                                            <t t-esc="lci.sub_assembly_name"/>
+                                    </button>
+                                </t>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tab-content">
+                            <div class="tab-pane fade show active" id="nav-assembly" role="tabpanel" aria-labelledby="nav-assembly-tab">
+                                <t t-if="state.lca_result.lci_data.material_consumption.length > 0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped-columns caption-top">
+                                            <caption>Material Consumptions</caption>
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col" class="id">#</th>
+                                                    <th scope="col" class="name">Material Name</th>
+                                                    <th scope="col" class="amount">Amount</th>
+                                                    <th scope="col" class="unit">Unit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="state.lca_result.lci_data.material_consumption" t-as="material" t-key="material_index">
+                                                    <tr>
+                                                        <th scope="row"><t t-esc="material_index + 1" /></th>
+                                                        <td><t t-esc="material.product_name" /></td>
+                                                        <td><t t-esc="parseFloat2D(material.amount)" /></td>
+                                                        <td><t t-esc="material.unit" /></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </t>
+                                <t t-if="state.lca_result.lci_data.energy_consumption.length > 0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered caption-top">
+                                            <caption>Energy Consumptions</caption>
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col" class="id">#</th>
+                                                    <th scope="col" class="name">Electrical Energy</th>
+                                                     <th scope="col" class="amount">Amount</th>
+                                                    <th scope="col" class="unit">Unit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="state.lca_result.lci_data.energy_consumption" t-as="energy" t-key="energy_index">
+                                                    <tr>
+                                                        <th scope="row"><t t-esc="energy_index + 1" /></th>
+                                                        <td><t t-esc="energy.product_name" /></td>
+                                                        <td><t t-esc="parseFloat2D(energy.amount)" /></td>
+                                                        <td><t t-esc="energy.unit" /></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </t>
+                                 <t t-if="state.lca_result.lci_data.transportations.length > 0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered caption-top">
+                                            <caption>Transportations (Estimated)</caption>
+                                            <thead class="table-light">
+                                                <tr>
+                                                     <th scope="col" class="id">#</th>
+                                                    <th scope="col" class="name">Transportation Mode</th>
+                                                    <th scope="col" class="amount">Amount</th>
+                                                    <th scope="col" class="unit">Unit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="state.lca_result.lci_data.transportations" t-as="transportation" t-key="transportation_index">
+                                                        <tr>
+                                                            <th scope="row" ><t t-esc="transportation_index + 1" /></th>
+                                                            <td ><t t-esc="transportation.product_name" /></td>
+                                                            <td ><t t-esc="parseFloat2D(transportation.amount)" /></td>
+                                                            <td ><t t-esc="transportation.unit" /></td>
+                                                        </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </t>
+                            </div>
+                            <t t-foreach="state.lca_result.lci_data.sub_assemblies" t-as="lci" t-key="lci_index">
+                                <div class="tab-pane fade" role="tabpanel"  t-att-id="'nav-' + lci_index"
+                                     t-att-aria-labelledby="'nav-' + lci_index + '-tab'">
+        <!--                             t-att-class="lci_index == 0 ? 'show active' : ''">-->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped-columns caption-top">
+                                            <caption>Material Consumptions</caption>
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col" class="id">#</th>
+                                                    <th scope="col" class="name">Material Name</th>
+                                                    <th scope="col" class="amount">Amount</th>
+                                                    <th scope="col" class="unit">Unit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="lci.material_consumption" t-as="material" t-key="material_index">
+                                                    <tr>
+                                                        <th scope="row"><t t-esc="material_index + 1" /></th>
+                                                        <td><t t-esc="material.product_name" /></td>
+                                                        <td><t t-esc="parseFloat2D(material.amount)" /></td>
+                                                        <td><t t-esc="material.unit" /></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <t t-if="lci.energy_consumption.length > 0">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered caption-top">
+                                                <caption>Energy Consumptions</caption>
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th scope="col" class="id">#</th>
+                                                        <th scope="col" class="name">Electrical Energy</th>
+                                                         <th scope="col" class="amount">Amount</th>
+                                                        <th scope="col" class="unit">Unit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="lci.energy_consumption" t-as="energy" t-key="energy_index">
+                                                        <tr>
+                                                            <th scope="row"><t t-esc="energy_index + 1" /></th>
+                                                            <td><t t-esc="energy.product_name" /></td>
+                                                            <td><t t-esc="parseFloat2D(energy.amount)" /></td>
+                                                            <td><t t-esc="energy.unit" /></td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </t>
+                                    <t t-if="lci.transportations.length > 0">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered caption-top">
+                                                <caption>Transportations (Estimated)</caption>
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th scope="col" class="id">#</th>
+                                                        <th scope="col" class="name">Transportation Mode</th>
+                                                         <th scope="col" class="amount">Amount</th>
+                                                        <th scope="col" class="unit">Unit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="lci.transportations" t-as="transportation" t-key="transportation_index">
+                                                        <tr>
+                                                            <th scope="row"><t t-esc="transportation_index + 1" /></th>
+                                                            <td><t t-esc="transportation.product_name" /></td>
+                                                            <td><t t-esc="parseFloat2D(transportation.amount)" /></td>
+                                                            <td><t t-esc="transportation.unit" /></td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div t-if="state.lca_result">
+                        <div t-if="Object.keys(state.lca_result.analyzed_response).length == 0"
+                             class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#dc3545"
+                                 class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                            <span style="padding: 0 5px;">Unexpected errors! </span>
+                            <a href="mailto:development@technovativesolutions.co.uk" class="alert-link">Please contact with us</a>
+                        </div>
+
+                        <div t-else="">
+                            <div class="py-3">
+                                <h2>Life Cycle Assessment (LCA) Results</h2>
+                                <p>Evaluated Life Cycle Assessment (LCA) using the above Life Cycle Inventory (LCI) data</p>
+                            </div>
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button t-if="state.lca_result.analyzed_response.rtCharacterisation.length > 0" class="nav-link active" id="nav-characterisation-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-characterisation" type="button" role="tab"
+                                            aria-controls="nav-characterisation" aria-selected="true">
+                                        Characterisation
+                                    </button>
+                                    <button t-if="state.lca_result.analyzed_response.rtDamage.length > 0" class="nav-link" id="nav-damage-assessment-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-damage-assessment" type="button" role="tab"
+                                            aria-controls="nav-damage-assessment" aria-selected="false">
+                                        Damage Assessment
+                                    </button>
+                                    <button t-if="state.lca_result.analyzed_response.rtSingleScore.length > 0" class="nav-link" id="nav-single-score-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-single-score" type="button" role="tab"
+                                            aria-controls="nav-single-score" aria-selected="false">
+                                        Single Score
+                                    </button>
+                                </div>
+                            </nav>
+
+                            <div class="tab-content" id="nav-tab-content">
+                                <div class="tab-pane fade show active" id="nav-characterisation" role="tabpanel"
+                                     aria-labelledby="nav-characterisation-tab">
+                                    <p class="my-2">The substances that contribute to an impact category are multiplied by a characterisation factor that expresses the relative contribution of the substances for various environmental impact categories.</p>
+                                    <p>Reference:
+                                        <a class="text-primary text-decoration-underline"
+                                           href="https://simapro.com/wp-content/uploads/2020/10/DatabaseManualMethods.pdf">https://simapro.com/wp-content/uploads/2020/10/DatabaseManualMethods.pdf
+                                        </a>
+                                    </p>
+                                    <Datatable
+                                            title="`Characterisation`"
+                                            columns="state.lca_columns"
+                                            rows="state.lca_result.analyzed_response.rtCharacterisation"
+                                    />
+                                </div>
+                                <div class="tab-pane fade" id="nav-damage-assessment" role="tabpanel"
+                                     aria-labelledby="nav-damage-assessment-tab">
+                                    <p class="my-2">Damage assessment aims to combine a number of environmental impact category indicators into several endpoint damage categories (also termed as area of protection (AoP)).</p>
+                                    <p>Reference:
+                                        <a class="text-primary text-decoration-underline"
+                                           href="https://simapro.com/wp-content/uploads/2020/10/DatabaseManualMethods.pdf">https://simapro.com/wp-content/uploads/2020/10/DatabaseManualMethods.pdf
+                                        </a>
+                                    </p>
+                                    <Datatable
+                                            title="`Damage Assessment`"
+                                            columns="state.lca_columns"
+                                            rows="state.lca_result.analyzed_response.rtDamage"
+                                    />
+                                </div>
+                                <div class="tab-pane fade" id="nav-single-score" role="tabpanel"
+                                     aria-labelledby="nav-single-score-tab">
+                                    <p class="my-2">Single score is defined as a parameter that weights multiple measured environmental impacts into one universal impact factor, often expressed as "millipoints".</p>
+                                    <p>Reference:
+                                        <a class="text-primary text-decoration-underline"
+                                           href="https://quizlet.com/590011154/sustainability-practice-test-flash-cards/">https://quizlet.com/590011154/sustainability-practice-test-flash-cards/
+                                        </a>
+                                    </p>
+                                    <Datatable
+                                            title="`Single Score`"
+                                            columns="state.lca_columns"
+                                            rows="state.lca_result.analyzed_response.rtSingleScore"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-center gap-2">
+                        <button class="lca-btn-secondary" t-on-click="saveAsPDF">
+                            <img src="/lca_tool/static/src/assets/image/save_icon.svg" alt="Icon"/>
+                            <span class="icon-space"></span>
+                            <span>Download</span>
+                        </button>
+                        <button class="lca-btn-secondary" t-on-click="()=>saveAsPDF(true)" >
+                            <img src="/lca_tool/static/src/assets/image/print_icon.svg" alt="Icon"/>
+                            <span class="icon-space"></span>
+                            <span>Print</span>
+                        </button>
+<!--                        <button class="lca-btn-secondary">-->
+<!--                            <img src="/lca_tool/static/src/assets/image/share_icon.svg" alt="Icon"/>-->
+<!--                            <span class="icon-space"></span>-->
+<!--                            <span>Share</span>-->
+<!--                        </button>-->
+                    </div>
+                 </t>
+            </div>
+
+   </t>
+</templates>

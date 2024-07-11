@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="lca_tool.lca_base" owl="1">
+        <div class="container d-flex justify-content-center">
+                <LcaBasicData t-if="state.page == 0"  model="model" countries="state.countries" units="units" _next="_next" _cancelPage="_cancelPage" _basicDataValidation="_basicDataValidation" />
+                <LcaModelling t-if="state.page == 1" state="state" model="model" _next="_next" _cancelPage="_cancelPage" onToggleMaterialCollapse="onToggleMaterialCollapse" onToggleEnergyCollapse="onToggleEnergyCollapse" currentSubAssembly="currentSubAssembly" addSubAssembly="addSubAssembly" clearSubAssembly="clearSubAssembly" addMaterial="addMaterial" editMaterial="editMaterial" removeMaterial="removeMaterial" addEnergyConsumption="addEnergyConsumption" editEnergyConsumption="editEnergyConsumption" removeEnergyConsumption="removeEnergyConsumption" />
+                <LcaReport t-if="state.page == 2" state="state" reqBody="model.lcaReport.reqBody" />
+        </div>
+    </t>
+</templates>

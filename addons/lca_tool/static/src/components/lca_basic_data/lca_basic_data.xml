@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+   <t t-name="lca_tool.lca_basic_data" owl="1">
+        <div class="basic-inputs w-100 my-5">
+            <h4 class="text-center">LCA Calculation</h4>
+                <div class="form-group">
+                    <label for="countrySelect">Country of Origin</label>
+                    <select class="form-control p-2" id="countrySelect" t-model="props.model.lcaBasicData.country_code">
+                        <option value="">Country of origin</option>
+                        <t t-foreach="props.countries" t-as="countryGroup" t-key="countryGroup.groupName">
+                            <optgroup t-att-label="countryGroup.groupName">
+                                <t t-foreach="countryGroup.countries" t-as="country" t-key="country.code">
+                                    <option t-att-value="country.code">
+                                        <t t-esc="country.name"/>
+                                    </option>
+                                </t>
+                            </optgroup>
+                        </t>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assemblyName">Component/Product Name</label>
+                    <input type="text" placeholder="Enter component or product name" class="form-control p-2" id="assemblyName" t-model="props.model.lcaBasicData.assemblyName"/>
+                </div>
+                <!--<div class="form-group">
+                    <label for="unitSelect">Functional Unit</label>
+                    <select class="form-control p-2" id="unitSelect" t-model="props.model.lcaBasicData.unit">
+                        <option t-foreach="props.units" t-as="unit" t-key="unit.name">
+                             <t t-esc="unit.name"/>
+                        </option>
+                    </select>
+                </div>-->
+                <div class="form-group">
+                    <label for="exampleDataList" class="form-label">Functional Unit</label>
+                    <input class="form-control p-2" list="datalistOptions" id="exampleDataList" placeholder="Enter functional unit" t-model="props.model.lcaBasicData.unit" />
+                    <datalist id="datalistOptions">
+                      <option value="1 piece of structural unit" />
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="subassemblyName">No. of Sub-Assembly</label>
+                    <input type="number" min="0" max="20" placeholder="Enter a number" class="form-control p-2" id="numberOfSubAssembly" t-model="props.model.lcaBasicData.numberOfSubAssembly" />
+                </div>
+                <div class="mt-4 d-flex gap-2">
+                    <button type="button" class="btn lca-btn-secondary w-50 p-2 rounded-2" t-on-click="props._cancelPage">Cancel</button>
+                    <button type="button" class="btn lca-btn-primary w-50 p-2 rounded-2" t-on-click="props._next" t-att-class="props._basicDataValidation() ? '' : 'disabled' ">Next</button>
+                </div>
+        </div>
+   </t>
+</templates>

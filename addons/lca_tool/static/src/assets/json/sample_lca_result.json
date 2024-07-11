@@ -1,0 +1,218 @@
+{
+  "lci_data": {
+    "country_code": "AD",
+    "id": "2ff2c57a",
+    "assembly_name": "Test-AS",
+    "product_name": "Test-AS-id-2ff2c57a",
+    "sub_assemblies": [
+      {
+        "sub_assembly_name": "Test-SA1",
+        "material_consumption": [
+          {
+            "product_name": "Glycerine {RER}| market for glycerine | APOS, S",
+            "unit": "kg",
+            "amount": 0.5
+          },
+          {
+            "product_name": "Clinker {Europe without Switzerland}| market for clinker | APOS, S",
+            "unit": "kg",
+            "amount": 0.9
+          }
+        ],
+        "energy_consumption": [
+          {
+            "product_name": "Electricity, low voltage {RoW}| electricity voltage transformation from medium to low voltage | APOS, S",
+            "unit": "kWh",
+            "amount": 3.5
+          }
+        ],
+        "transportations": [
+          {
+            "product_name": "Transport, freight, lorry 16-32 metric ton, euro4 {RoW}| market for transport, freight, lorry 16-32 metric ton, EURO4 | APOS, S",
+            "unit": "tkm",
+            "amount": 2.24444444
+          },
+          {
+            "product_name": "Transport, sea ship, 120000 DWT, 100%LF, long, default {GLO} Economic, S",
+            "unit": "tkm",
+            "amount": 6.16666666
+          }
+        ]
+      },
+      {
+        "sub_assembly_name": "Test-SA2",
+        "material_consumption": [
+          {
+            "product_name": "Steel, low-alloyed {GLO}| market for | APOS, S",
+            "unit": "kg",
+            "amount": 2
+          }
+        ],
+        "energy_consumption": [],
+        "transportations": [
+          {
+            "product_name": "Transport, freight, lorry 16-32 metric ton, euro4 {RoW}| market for transport, freight, lorry 16-32 metric ton, EURO4 | APOS, S",
+            "unit": "tkm",
+            "amount": 1.6
+          },
+          {
+            "product_name": "Transport, sea ship, 120000 DWT, 100%LF, long, default {GLO} Economic, S",
+            "unit": "tkm",
+            "amount": 8.4
+          }
+        ]
+      }
+    ],
+    "material_consumption": [
+      {
+        "product_name": "Glycerine {RER}| market for glycerine | APOS, S",
+        "unit": "kg",
+        "amount": 0.5000
+      },
+      {
+        "product_name": "Clinker {Europe without Switzerland}| market for clinker | APOS, S",
+        "unit": "kg",
+        "amount": 0.999
+      }
+    ],
+    "transportations": [
+      {
+        "product_name": "Transport, freight, lorry 16-32 metric ton, euro4 {RoW}| market for transport, freight, lorry 16-32 metric ton, EURO4 | APOS, S",
+        "unit": "tkm",
+        "amount": 2.24
+      },
+      {
+        "product_name": "Transport, sea ship, 120000 DWT, 100%LF, long, default {GLO} Economic, S",
+        "unit": "tkm",
+        "amount": 6.16
+      }
+    ],
+    "energy_consumption": [
+      {
+        "product_name": "Electricity, low voltage {RoW}| electricity voltage transformation from medium to low voltage | APOS, S",
+        "unit": "kWh",
+        "amount": 9.60000
+      }
+    ]
+  },
+  "analyzed_response": {
+    "rtCharacterisation": [
+      {
+        "indicator_name": "Climate change, short term",
+        "amount": 9.252184120501273,
+        "unit_name": "kg CO2 eq"
+      },
+      {
+        "indicator_name": "Climate change, long term",
+        "amount": 8.892878332158343,
+        "unit_name": "kg CO2 eq"
+      },
+      {
+        "indicator_name": "Fossil and nuclear energy use",
+        "amount": 94.07823135871513,
+        "unit_name": "MJ deprived"
+      },
+      {
+        "indicator_name": "Mineral resources use",
+        "amount": 1.9751344449417283,
+        "unit_name": "kg deprived"
+      },
+      {
+        "indicator_name": "Photochemical oxidant formation",
+        "amount": 0.03408849274943861,
+        "unit_name": "kg NMVOC eq"
+      },
+      {
+        "indicator_name": "Ozone layer depletion",
+        "amount": 1.0558793097355345e-06,
+        "unit_name": "kg CFC-11 eq"
+      },
+      {
+        "indicator_name": "Freshwater ecotoxicity",
+        "amount": 108047.9008974804,
+        "unit_name": "CTUe"
+      },
+      {
+        "indicator_name": "Human toxicity cancer",
+        "amount": 7.990494069731961e-06,
+        "unit_name": "CTUh"
+      },
+      {
+        "indicator_name": "Human toxicity non-cancer",
+        "amount": 2.5987508224989178e-06,
+        "unit_name": "CTUh"
+      },
+      {
+        "indicator_name": "Freshwater acidification",
+        "amount": 8.615430838776872e-08,
+        "unit_name": "kg SO2 eq"
+      },
+      {
+        "indicator_name": "Terrestrial acidification",
+        "amount": 8.627028965169648e-05,
+        "unit_name": "kg SO2 eq"
+      },
+      {
+        "indicator_name": "Freshwater eutrophication",
+        "amount": 0.0003157988710560779,
+        "unit_name": "kg PO4 eq"
+      },
+      {
+        "indicator_name": "Marine eutrophication",
+        "amount": 0.0013566009211679133,
+        "unit_name": "kg N eq"
+      },
+      {
+        "indicator_name": "Particulate matter formation",
+        "amount": 0.004808377858487049,
+        "unit_name": "kg PM2.5 eq"
+      },
+      {
+        "indicator_name": "Ionizing radiation",
+        "amount": 48.014671454771566,
+        "unit_name": "Bq C-14 eq"
+      },
+      {
+        "indicator_name": "Land transformation, biodiversity",
+        "amount": 0.7735948703492577,
+        "unit_name": "m2yr arable"
+      },
+      {
+        "indicator_name": "Land occupation, biodiversity",
+        "amount": 3.8303542851852375,
+        "unit_name": "m2yr arable"
+      },
+      {
+        "indicator_name": "Water scarcity",
+        "amount": 2.6019129123832307,
+        "unit_name": "m3 world eq"
+      }
+    ],
+    "rtDamage": [
+       {
+        "indicator_name": "Climate change, short term",
+        "amount": 9.252184120501273,
+        "unit_name": "kg CO2 eq"
+      },
+      {
+        "indicator_name": "Climate change, long term",
+        "amount": 8.892878332158343,
+        "unit_name": "kg CO2 eq"
+      },
+      {
+        "indicator_name": "Fossil and nuclear energy use",
+        "amount": 94.07823135871513,
+        "unit_name": "MJ deprived"
+      }
+    ],
+    "rtNormalisation": [],
+    "rtWeighting": [],
+    "rtSingleScore": [
+       {
+        "indicator_name": "Climate change, short term",
+        "amount": 9.252184120501273,
+        "unit_name": "kg CO2 eq"
+      }
+    ]
+  }
+}

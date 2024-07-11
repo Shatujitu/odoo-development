@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+   <t t-name="lca_tool.lca_modelling" owl="1">
+        <div class="sub-assembly-inputs w-100 my-5">
+            <div class="owl-carousel owl-theme">
+                <t t-foreach="state.numberOfSubAssembly" t-as="index" t-key="index">
+                    <div class="item owl-btn-secondary" t-att-class="state.stepOfSubAssembly == index ? 'nav-active' : '' " t-att-style="props.model.lcaModelling.findIndex(el => el.name === `subAssembly${index}`) > -1 or index == this.state.finalAssemblyIndex ? '' : errorOutline " >
+                            <p t-if="index == this.state.finalAssemblyIndex" class="mb-0" type="button" t-on-click="() => this.onSubAssemblyStepChange(index)">Assembly</p>
+                            <p t-else="" class="mb-0" type="button" t-on-click="() => this.onSubAssemblyStepChange(index)">Sub-Assembly <t t-esc="index+1"/></p>
+                    </div>
+                </t>
+            </div>
+            <div class="px-1 py-3 d-flex justify-content-between">
+                <div class="sub-assembly-details d-inline-block">
+                    <span>LCA <strong><t t-esc="props.model.lcaBasicData.assemblyName" /></strong></span>
+                    |
+                    <span>Functional Unit <strong><t t-esc="props.model.lcaBasicData.unit" /></strong></span>
+                </div>
+            </div>
+
+            <div class="accordion" id="accordionMaterial">
+                <div class="accordion-item">
+                    <h2 class="accordion-header lca-accordion-header">
+                        <button class="accordion-button collapsed" type="button" aria-expanded="false" aria-controls="collapseMaterial" t-on-click="()=> props.onToggleMaterialCollapse()">
+                            <img src="/lca_tool/static/src/assets/image/material_fill.svg" alt="Icon"/>
+                            <span class="icon-space"></span>
+                            <span>Material</span>
+                        </button>
+                    </h2>
+                    <div id="collapseMaterial" class="accordion-collapse collapse" data-bs-parent="#accordionMaterial" t-att-class="{'show': props.currentSubAssembly.isMaterialCollapse}">
+                        <div t-if="props.currentSubAssembly.materials.length > 0" class="accordion-body p-0 m-0">
+                            <div class="d-flex">
+                                <div class="acc-sub-title text-center w-100 p-3">Name</div>
+                                <div class="acc-sub-title text-center w-50 p-3">Amount</div>
+                                <div class="acc-sub-title text-center w-50 p-3">Unit</div>
+                                <div class="acc-sub-title text-center w-100 p-3">Road Transport (km)</div>
+                                <div class="acc-sub-title text-center w-100 p-3">Marine Transport (km)</div>
+                                <div class="acc-sub-title text-center w-100 p-3">Action</div>
+                            </div>
+                            <t t-foreach="props.currentSubAssembly.materials" t-as="materialData" t-key="props.currentSubAssembly.materials.indexOf(materialData)">
+                                <div class="d-flex">
+                                    <div class="acc-sub-value text-center w-100 p-3"><t t-esc="materialData.name" /></div>
+                                    <div class="acc-sub-value text-center w-50 p-3"><t t-esc="materialData.amount" /></div>
+                                    <div class="acc-sub-value text-center w-50 p-3"><t t-esc="materialData.unit" /></div>
+                                    <div class="acc-sub-value text-center w-100 p-3"><t t-esc="materialData.road" /></div>
+                                    <div class="acc-sub-value text-center w-100 p-3"><t t-esc="materialData.marine" /></div>
+                                    <div class="acc-sub-value text-center w-100 p-3">
+                                        <a type="button" t-on-click="() => handleOpenMaterialModal(materialData)">
+                                            <img src="/lca_tool/static/src/assets/image/edit.svg" alt="Icon"/>
+                                        </a>
+                                        <span class="icon-space"></span>
+                                        <a type="button" t-on-click="() => this.handleRemoveMaterial(materialData.id)">
+                                            <img src="/lca_tool/static/src/assets/image/trash.svg" alt="Icon"/>
+                                        </a>
+                                    </div>
+                              </div>
+                            </t>
+                        </div>
+                        <div class="pt-3 px-3 border border-1" t-else="">
+                            <p>No material data is available.</p>
+                        </div>
+                        <div class="py-3">
+                            <button type="button" class="btn add-data-btn"
+                                  t-on-click="() => handleOpenMaterialModal()">+ Add Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-2"></div>
+            <div class="accordion" id="accordionEnergy">
+                <div class="accordion-item">
+                    <h2 class="accordion-header lca-accordion-header">
+                        <button class="accordion-button collapsed" type="button" aria-expanded="false" aria-controls="collapseEnergy" t-on-click="()=> props.onToggleEnergyCollapse()">
+                            <img src="/lca_tool/static/src/assets/image/energy_fill.svg" alt="Icon"/>
+                            <span class="icon-space"></span>
+                            <span>Energy Consumption</span>
+                        </button>
+                    </h2>
+                    <div id="collapseEnergy" class="accordion-collapse collapse" data-bs-parent="#accordionEnergy" t-att-class="{'show': props.currentSubAssembly.isEnergyCollapse}">
+                        <div t-if="props.currentSubAssembly.energyConsumptions.length > 0" class="accordion-body p-0 m-0">
+                            <div class="d-flex">
+                                <div class="acc-sub-title text-center w-100 p-3">Name</div>
+                                <div class="acc-sub-title text-center w-100 p-3">Amount</div>
+                                <div class="acc-sub-title text-center w-100 p-3">Unit</div>
+                                <div class="acc-sub-title text-center w-100 p-3">Action</div>
+                            </div>
+                            <t t-foreach="props.currentSubAssembly.energyConsumptions" t-as="energyData" t-key="props.currentSubAssembly.energyConsumptions.indexOf(energyData)">
+                                <div class="d-flex">
+                                    <div class="acc-sub-value text-center w-100 p-3"><t t-esc="energyData.name" /></div>
+                                    <div class="acc-sub-value text-center w-100 p-3"><t t-esc="energyData.amount" /></div>
+                                    <div class="acc-sub-value text-center w-100 p-3"><t t-esc="energyData.unit" /></div>
+                                    <div class="acc-sub-value text-center w-100 p-3">
+                                        <a type="button" t-on-click="() => handleOpenEnergyModal(energyData)">
+                                            <img src="/lca_tool/static/src/assets/image/edit.svg" alt="Icon"/>
+                                        </a>
+                                        <span class="icon-space"></span>
+                                        <a type="button" t-on-click="() => this.handleRemoveEnergyConsumption(energyData.id)">
+                                            <img src="/lca_tool/static/src/assets/image/trash.svg" alt="Icon"/>
+                                        </a>
+                                    </div>
+                              </div>
+                            </t>
+                        </div>
+                        <div class="pt-3 px-3 border border-1" t-else="">
+                            <p>No energy consumption data is available.</p>
+                        </div>
+                        <div class="py-3">
+                            <button type="button" class="btn add-data-btn"
+                                  t-on-click="() => handleOpenEnergyModal()" t-att-style="props.currentSubAssembly.energyConsumptions.length > 0 ? 'display: none;' : '' ">+ Add Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-2 pt-4">
+                <button type="button" class="btn lca-btn-secondary p-2 rounded-2" t-on-click="props._cancelPage">Cancel</button>
+                <button type="button" class="btn lca-btn-primary p-2 rounded-2" t-on-click="() => this.onSubAssemblyStepChange(state.stepOfSubAssembly+1)" t-att-class="subAssemblyValidation() ? '' : 'disabled' ">Next</button>
+            </div>
+        </div>
+
+        <!-- Material Modal View -->
+        <div t-att-style="materialModalView" class="modal">
+            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>
+                            <t t-if="currentMaterial.id !== ''" >
+                              Update
+                            </t>
+                            <t t-else="" >
+                              Add
+                            </t>
+                            Material Details
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="w-100" t-if="currentMaterial.id !== ''">
+                            <label for="materialName" class="me-2">Material:</label>
+                            <strong><t t-esc="props.currentSubAssembly.materials.find((el) => el.id === currentMaterial.id).name" /></strong>
+                        </div>
+                        <div class="form-group d-flex gap-2">
+                            <div class="w-100">
+                                <label for="materialCategorySelect">Category</label>
+                                <select class="form-control padding-modal-input" id="materialCategorySelect" t-model="currentMaterial.category">
+                                    <option value="" class="d-none">Select category</option>
+                                    <option t-foreach="state.materialCategories" t-as="category" t-key="category.id">
+                                        <t t-esc="category.name"/>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="w-100" t-att-class="{'d-none': !state.showSubCategorySelection}">
+                                <label for="materialSubCategorySelect">Sub Category</label>
+                                <select class="form-control padding-modal-input" id="materialSubCategorySelect" t-model="currentMaterial.subCategory">
+                                    <option value="" class="d-none">Select sub-category</option>
+                                    <option t-foreach="state.materialSubCategories" t-as="subCategory" t-key="subCategory.id">
+                                        <t t-esc="subCategory.name"/>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="searchable-select w-100" t-att-class="{'d-none': !state.showProductSelection}">
+                                 <label for="searchInput">Material</label>
+                                <input type="text" class="form-control p-2" t-on-click="()=>showSearchList()" t-model="currentMaterial.name" id="searchInput" data-bs-toggle="dropdown" aria-expanded="false" placeholder="Select material" />
+                                <ul class="dropdown-menu" aria-labelledby="searchInput" t-att-class="{'show': state.showSearchList}">
+                                    <t t-foreach="state.materialProducts" t-as="material" t-key="material.id">
+                                        <li><a class="dropdown-item" t-on-click="()=>onItemSelect(material.name)" href="#">
+                                            <t t-esc="material.name"/>
+                                        </a></li>
+                                    </t>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex gap-2">
+                            <div class="w-100">
+                                <label for="materialAmountInput">Amount</label>
+                                <input type="number" min="0" class="form-control" id="materialAmountInput" placeholder="Enter a number" t-model="currentMaterial.amount" />
+                            </div>
+                            <div class="w-100">
+                                <label for="materialUnitSelection">Unit</label>
+                                 <select class="form-control" id="materialUnitSelection" t-model="currentMaterial.unit">
+                                     <option value="">select unit</option>
+                                     <t t-if="state.productData.quantity_name">
+                                        <option t-foreach="state.units[state.productData.quantity_name]" t-as="unit" t-key="unit_index" t-att="{ 'selected': unit == state.productData.default_unit }">
+                                         <t t-esc="unit"/>
+                                        </option>
+                                     </t>
+                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex gap-2">
+                            <div class="w-100">
+                                <label for="materialRoadInput">Road Transport (km)</label>
+                                <input type="number" min="0" class="form-control" id="materialRoadInput" placeholder="Enter a number" t-model="currentMaterial.road" />
+                            </div>
+                            <div class="w-100">
+                                <label for="materialMarineInput">Marine Transport (km)</label>
+                                <input type="number" min="0" class="form-control" id="materialMarineInput" placeholder="Enter a number" t-model="currentMaterial.marine" />
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 pt-4">
+                            <button type="button" class="btn lca-btn-secondary w-50 p-2 rounded-2" t-on-click="() => handleCloseMaterialModal()">Cancel</button>
+                            <t t-if="currentMaterial.id !== ''" >
+                                <button type="button" class="btn lca-btn-primary w-50 p-2 rounded-2" t-on-click="handleEditMaterial" t-att-class="materialValidation() ? '' : 'disabled' ">Update</button>
+                            </t>
+                            <t t-else="" >
+                                <button type="button" class="btn lca-btn-primary w-50 p-2 rounded-2" t-on-click="handleAddMaterial" t-att-class="materialValidation() ? '' : 'disabled' ">Add</button>
+                           </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <!-- Energy Modal View -->
+        <div t-att-style="energyModalView" class="modal">
+            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>
+                            <t t-if="currentEnergyConsumption.id !== ''" >
+                                Update
+                            </t>
+                            <t t-else="" >
+                            Add
+                            </t>
+                            Energy Consumption Details
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="w-100" t-if="currentEnergyConsumption.id !== ''">
+                            <label for="materialName" class="me-2">Energy Consumption:</label>
+                            <strong><t t-esc="props.currentSubAssembly.energyConsumptions.find((el) => el.id === currentEnergyConsumption.id).name" /></strong>
+                        </div>
+                        <div class="form-group d-flex gap-2">
+                            <div class="w-100">
+                                <label for="energyCategorySelect">Category</label>
+                                <select class="form-control padding-modal-input" id="energyCategorySelect" t-model="currentEnergyConsumption.name">
+                                    <option value="" class="d-none">Select category</option>
+                                    <option t-foreach="state.energyCategories" t-as="category" t-key="category_index">
+                                        <t t-esc="category"/>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <div class="w-100">
+                                <label for="estimationType">Following options are available to estimate energy consumption per functional unit</label>
+                                <div class="form-check mt-2">
+                                    <label class="form-check-label" for="flexRadioDefault1" t-att-class="currentEnergyConsumption.estimationType === 'process' ? 'label-active' : '' ">
+                                        If process energy consumption known
+                                    </label>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" value="process" t-model="currentEnergyConsumption.estimationType" t-on-change="clearMonthlyEnergy"/>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="flexRadioDefault2" t-att-class="currentEnergyConsumption.estimationType === 'monthly' ? 'label-active' : '' ">
+                                    If monthly energy consumption known
+                                    </label>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2" value="monthly" t-model="currentEnergyConsumption.estimationType" t-on-change="clearProcessEnergy"/>
+                                </div>
+                            </div>
+                        </div>
+                        <t t-if="currentEnergyConsumption.estimationType !== ''">
+                        <div class="form-group" t-if="currentEnergyConsumption.estimationType === 'monthly'">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" t-model="currentEnergyConsumption.knowEnergyAmount" t-on-change="clearAmountReading" />
+                                <label class="form-check-label fw-normal">
+                                    I know the monthly meter reading only
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex gap-2" t-if="currentEnergyConsumption.knowEnergyAmount">
+                            <div class="w-100">
+                                <label for="initialReadingInput">Initial Reading</label>
+                                <input type="number" min="0" class="form-control" id="initialReadingInput" placeholder="Enter a number" t-model="currentEnergyConsumption.initialReading" t-on-change="amountCalculate" t-on-keyup="amountCalculate"/>
+                            </div><div class="w-100">
+                                <label for="finalReadingInput">Final Reading</label>
+                                <input type="number" min="0" class="form-control" id="finalReadingInput" placeholder="Enter a number" t-model="currentEnergyConsumption.finalReading" t-on-change="amountCalculate" t-on-keyup="amountCalculate"/>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex gap-2" t-if="!currentEnergyConsumption.knowEnergyAmount">
+                            <div class="w-100">
+                                <label for="energyAmountInput">Amount</label>
+                                <input type="number" min="0" class="form-control" id="energyAmountInput" placeholder="Enter a number" t-model="currentEnergyConsumption.amount" />
+                            </div>
+                            <div class="w-100">
+                                <label for="energyUnitSelection">Unit</label>
+                                <select class="form-control" id="energyUnitSelection" t-model="currentEnergyConsumption.unit">
+                                     <option value="">select unit</option>
+                                     <t t-if="state.productData.quantity_name">
+                                        <option t-foreach="state.units[state.productData.quantity_name]" t-as="unit" t-key="unit_index" t-att="{ 'selected': unit == state.productData.default_unit }">
+                                         <t t-esc="unit"/>
+                                        </option>
+                                     </t>
+                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex gap-2">
+                            <div class="w-100">
+                                <label for="energyAmountInput" t-if="currentEnergyConsumption.estimationType === 'process'">Total mass of the process (kg)</label>
+                                <label for="energyAmountInput" t-if="currentEnergyConsumption.estimationType === 'monthly'">Total production of product/components by weight per month using the process (kg)</label>
+                                <input type="number" min="0" class="form-control" placeholder="Enter a number" t-model="props.currentSubAssembly.totalMass" />
+                            </div>
+                        </div>
+                        <div  t-if="currentEnergyConsumption.estimationType === 'monthly'">
+                            <div class="form-group d-flex gap-2">
+                                <div class="w-100">
+                                    <label for="overheadFactorInput">Overhead Factor (%)</label>
+                                    <input type="number" min="0" max="100" class="form-control" id="overheadFactorInput" placeholder="Enter a number" t-model="currentEnergyConsumption.overheadFactor" />
+                                </div>
+                            </div>
+                            <div class="form-group d-flex gap-2">
+                                <div class="w-100">
+                                    <label for="unitProductionInput">Number of unit production of <span class="component-text"><t t-esc="props.model.lcaBasicData.assemblyName" /></span> per month</label>
+                                    <input type="number" min="0" class="form-control" id="unitProductionInput" placeholder="Enter a number" t-model="currentEnergyConsumption.monthlyProduction" />
+                                </div>
+                            </div>
+                        </div>
+                        </t>
+                        <div class="d-flex gap-2 pt-4">
+                            <button type="button" class="btn lca-btn-secondary w-50 p-2 rounded-2" t-on-click="() => handleCloseEnergyModal()">Cancel</button>
+                            <t t-if="currentEnergyConsumption.id !== ''" >
+                                <button type="button" class="btn lca-btn-primary w-50 p-2 rounded-2" t-on-click="handleEditEnergyConsumption" t-att-class="energyValidation() ? '' : 'disabled' ">Update</button>
+                            </t>
+                            <t t-else="" >
+                                <button type="button" class="btn lca-btn-primary w-50 p-2 rounded-2" t-on-click="handleAddEnergyConsumption" t-att-class="energyValidation() ? '' : 'disabled' ">Add</button>
+                           </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <!-- Methodology Modal View -->
+        <div t-att-style="methodologyModalView" class="modal">
+            <div class="modal-dialog modal-md modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="bg-warning d-flex align-item-right">
+                            <button type="button" class="btn-close close-btn-right" t-on-click="() => handleCloseMethodologyModal()" />
+                        </div>
+                        <div class="p-5">
+                            <div class="text-center py-2">
+                                <h4><strong>Calculate result &amp; Generate report</strong></h4>
+                            </div>
+                            <div class="text-center py-2">
+                                <h6>To see result, please select one methodology</h6>
+                            </div>
+                            <div class="form-group px-5 py-2">
+                                <label for="methodologySelect" class="me-2">Select Methodology</label>
+                                <select class="form-control p-2" id="methodologySelect" t-model="props.model.lcaReport.method">
+                                    <option value="">Select a methodology</option>
+                                    <t t-foreach="props.state.methodologies" t-as="methodGroup" t-key="methodGroup.category">
+                                        <optgroup t-att-label="methodGroup.category">
+                                            <t t-foreach="methodGroup.methods" t-as="method" t-key="method">
+                                                <option t-att-value="method">
+                                                    <t t-esc="method"/>
+                                                </option>
+                                            </t>
+                                        </optgroup>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="text-center pt-5">
+                                <button type="button" class="btn lca-btn-primary" t-att-class="props.model.lcaReport.method ? '' : 'disabled'" t-on-click="() => props._next()">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </t>
+</templates>

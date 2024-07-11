@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "name": "Iron",
+  "product_name": "Ferite {GLO}|Production| APOS, U",
+  "quantity_name": "Mass",
+  "default_unit": "kg",
+  "road_transport": 50,
+  "marine_transport": 500
+}

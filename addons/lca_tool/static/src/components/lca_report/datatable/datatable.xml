@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="weldplanet.datatable" owl="1">
+        <div>
+            <div class="row">
+              <div id="man" class="col s12">
+                <div class="card material-table ">
+                  <div class="table-header">
+                    <span class="table-title" t-esc="props.title"></span>
+                  </div>
+                  <table t-ref="datatable" id="datatable" class="table table-hover small" width="100%"></table>
+                </div>
+              </div>
+            </div>
+
+        </div>
+    </t>
+</templates>
