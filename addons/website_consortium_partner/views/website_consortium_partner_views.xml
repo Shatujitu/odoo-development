@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- ====== List View ================================================ -->
+        <record id="view_consortium_partner_list" model="ir.ui.view">
+            <field name="name">Consortium Partner Page Tree</field>
+            <field name="model">consortium.partner</field>
+            <field name="priority">99</field>
+            <field name="arch" type="xml">
+                <tree string="Consortium Partners">
+                    <field name="id" optional="hide"/>
+                    <field name="name" optional="show"/>
+                    <field name="content" optional="hide"/>
+                    <field name="website" optional="show"/>
+                    <field name="logo" optional="show"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ====== Form View ================================================ -->
+        <record id="view_consortium_partner_form" model="ir.ui.view">
+            <field name="name">consortium.partner.form</field>
+            <field name="model">consortium.partner</field>
+            <field name="arch" type="xml">
+                <form string="Consortium Partners">
+                    <sheet>
+                        <field name="logo" widget="image" class="oe_avatar"/>
+                        <group name="consortium_partner_details">
+                            <field name="name" placeholder="Consortium Partner Name"/>
+                            <field name="content" placeholder="Consortium Partner Content"/>
+                            <field name="website" placeholder="https://c2impress.com"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ====== Actions ================================================ -->
+        <record id="action_consortium_partner" model="ir.actions.act_window">
+            <field name="name">Consortium Partners</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">consortium.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_consortium_partner_list')}),
+            ]"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                No consortium partner yet!
+              </p><p>
+                Please add a new consortium partner!
+              </p>
+            </field>
+        </record>
+        <!-- ====== Menu Items ============================================== -->
+        <menuitem id="menu_consortium_partner"
+            parent="website.menu_content"
+            sequence="30"
+            name="Consortium Partners"
+            action="website_consortium_partner.action_consortium_partner"/>
+    </data>
+</odoo>
+

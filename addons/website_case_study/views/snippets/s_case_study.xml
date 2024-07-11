@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_case_study" name="Case Study">
+        <section class="s_case_study border-none modal-true py-5">
+            <div class="container">
+                <div class="text-center pb-4">
+                    <h3 class="text-primary fw-bold">Our Case Study Area</h3>
+                </div>
+                <div class="row" id="s_case_study_row">
+                    <div class="col-3 p-3">
+                        <div class="card h-100"
+                             data-bs-toggle="modal"
+                             data-bs-target="#exampleModalOne">
+                            <div class="card-image">
+                                <img class="object-fit" src="" />
+                            </div>
+                            <div class="card-title px-3 pt-3">
+                                <h5 class="text-primary">Egaleo - Greece</h5>
+                            </div>
+                            <div class="card-text px-3">
+                                <p style="text-align: justify;">The case study concerns the estimation of the hazards inside the administrative limits of the municipality. The main hazards are: Heat waves, wildfires, floods &#38; earthquakes.</p>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="exampleModalOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                  <div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="case-header">
+                                    <h4 class="text-center text-primary">Egaleo: Greece</h4>
+                                  </div>
+                                  <hr></hr>
+                                  <div class="case-title">
+                                    <h3 class="text-primary">The case study concerns the estimation of the hazards inside the administrative limits of the municipality. The main hazards are: Heat waves, wildfires, floods &#38; earthquakes.</h3>
+                                  </div>
+                                  <div class="case-image py-2">
+                                    <img class="img-fluid" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 20px;" src="/website_case_study/static/src/img/s_case_study_card_image.png" />
+                                  </div>
+                                  <div class="case-text pt-2">
+                                      <p style="text-align: justify;">Content for Egaleo - Greece</p>
+                                  </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_event,custom.event,model_custom_event,,1,1,1,1
+access_custom_event_speaker,custom.event.speaker,model_custom_event_speaker,,1,1,1,1
+access_custom_event_tag,custom.event.tag,model_custom_event_tag,,1,1,1,1
+access_custom_event_button,custom.event.button,model_custom_event_button,,1,1,1,1

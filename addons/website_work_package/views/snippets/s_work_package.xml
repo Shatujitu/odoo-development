@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_work_package" name="Work Package">
+        <section class="s_work_package py-5">
+            <div class="container">
+                <div class="text-center pb-4">
+                    <h1>Work Package</h1>
+                </div>
+                <div class="row" id="s_work_package_row">
+                    <div class="col-3 p-2">
+                        <div class="card h-100 p-3"
+                             data-bs-toggle="modal"
+                             data-bs-target="#exampleModalOne">
+                            <div class="d-flex align-items-center gap-2">
+                               <div class="card-icon">
+                                   <img class="object-fit" src="/website_work_package/static/src/img/s_sample_card_image.png" />
+                               </div>
+                               <div class="card-name">
+                                   <h5>Work Package 1</h5>
+                               </div>
+                            </div>
+                            <div class="card-title pt-2">
+                                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</h4>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="exampleModalOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabelOne">Modal Title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                              </div>
+                                <div class="card-image">
+                                    <img class="object-fit" src="/website_work_package/static/src/img/s_sample_card_image.png" />
+                                </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save Changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_work_package_options" inherit_id="website.snippet_options">
+        <xpath expr="//div[@data-js='Box']" position="before">
+            <div data-js="WorkPackage" data-selector=".s_work_package" data-drop-in=".o_mega_menu nav">
+            </div>
+        </xpath>
+    </template>
+</odoo>

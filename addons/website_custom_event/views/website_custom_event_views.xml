@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- ====== Tree View ================================================ -->
+        <record id="view_custom_event_tree" model="ir.ui.view">
+            <field name="name">custom.event.tree</field>
+            <field name="model">custom.event</field>
+            <field name="arch" type="xml">
+                <tree string="Custom Events">
+                    <field name="id" optional="hide"/>
+                    <field name="title" optional="show"/>
+                    <field name="banner_image" optional="show"/>
+                    <field name="content" optional="hide"/>
+                    <field name="datetime" optional="show"/>
+                    <field name="speaker_ids" optional="hide"/>
+                    <field name="tag_ids" optional="show" widget="many2many_tags"/>
+                    <field name="button_id" optional="show"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ====== Form View ================================================ -->
+        <record id="view_custom_event_form" model="ir.ui.view">
+            <field name="name">custom.event.form</field>
+            <field name="model">custom.event</field>
+            <field name="arch" type="xml">
+                <form string="Custom Events">
+                    <sheet>
+                        <group>
+                            <group name="custom_event_details">
+                                <field name="title" placeholder="Event Title"/>
+                                <field name="content" placeholder="Event Content"/>
+                                <field name="note" placeholder="Event Note"/>
+                            </group>
+                            <group name="custom_event_card_details">
+                                <field name="banner_image" widget="image" class="oe_avatar"/>
+                                <field name="datetime" placeholder="Event Date and Time"/>
+                                <field name="time" placeholder="10 AM - 01 PM"/>
+                                <field name="timezone" placeholder="UTC+01:00" />
+                                <field name="venue" placeholder="Event Venue"/>
+                                <field name="link" widget="url" placeholder="Event Venue"/>
+                                <field name="reg_status" placeholder="Event Card Registration Status"/>
+                                <field name="button_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="tag_ids"
+                                   widget="many2many_tags"/>
+                        </group>
+                        <notebook>
+                            <page name="speakers_page" string="Speakers">
+                                <field name="speaker_ids"
+                                       widget="many2many"
+                                       options="{'resizable': false}">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Name" optional="show"/>
+                                        <field name="designation" optional="show"/>
+                                        <field name="description" optional="hide"/>
+                                        <field name="profile_image" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_custom_event_speaker_form" model="ir.ui.view">
+            <field name="name">custom.event.speaker.form</field>
+            <field name="model">custom.event.speaker</field>
+            <field name="arch" type="xml">
+                <form string="Event Speakers">
+                    <sheet>
+                        <field name="profile_image" widget="image" class="oe_avatar"/>
+                        <group name="custom_event_speaker_details">
+                            <field name="name" placeholder="Speaker Name"/>
+                            <field name="designation" placeholder="Speaker Designation"/>
+                            <field name="description" placeholder="Speaker Description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_custom_event_tag_form" model="ir.ui.view">
+            <field name="name">custom.event.tag.form</field>
+            <field name="model">custom.event.tag</field>
+            <field name="arch" type="xml">
+                <form string="Event Tags">
+                    <sheet>
+                        <group name="custom_event_tag_details">
+                            <field name="name" placeholder="Tag Name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ====== Actions ================================================ -->
+        <record id="action_custom_event" model="ir.actions.act_window">
+            <field name="name">Custom Events</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">custom.event</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_custom_event_tree')}),
+            ]"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Event yet!
+                </p>
+                <p>
+                    Please add a new event!
+                </p>
+            </field>
+        </record>
+
+        <record id="action_custom_event_tag" model="ir.actions.act_window">
+            <field name="name">Custom Event Tags</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">custom.event.tag</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Event Tag yet!
+                </p>
+                <p>
+                    Please add a new tag!
+                </p>
+            </field>
+        </record>
+
+        <record id="action_custom_event_speaker" model="ir.actions.act_window">
+            <field name="name">Custom Event Speakers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">custom.event.speaker</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Event Speaker yet!
+                </p>
+                <p>
+                    Please add a new speaker!
+                </p>
+            </field>
+        </record>
+        <!-- ====== Menu Items ============================================== -->
+        <menuitem id="menu_custom_event"
+                  parent="website.menu_content"
+                  sequence="30"
+                  name="Events"
+                  action="website_custom_event.action_custom_event"/>
+
+        <menuitem name="Custom Events"
+            id="menu_website_custom_event_root_global"
+            parent="website.menu_website_global_configuration"
+            sequence="110"
+            groups="website.group_website_designer"/>
+
+        <menuitem id="menu_custom_event_global"
+                  parent="menu_website_custom_event_root_global"
+                  name="Events"
+                  sequence="10"
+                  action="website_custom_event.action_custom_event"/>
+
+        <menuitem id="menu_custom_event_tag_global"
+                  parent="menu_website_custom_event_root_global"
+                  name="Tags"
+                  sequence="20"
+                  action="website_custom_event.action_custom_event_tag"/>
+
+        <menuitem id="menu_custom_event_speaker_global"
+                  parent="menu_website_custom_event_root_global"
+                  name="Speakers"
+                  sequence="30"
+                  action="website_custom_event.action_custom_event_speaker"/>
+    </data>
+</odoo>
+

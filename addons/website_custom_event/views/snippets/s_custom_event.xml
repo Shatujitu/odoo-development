@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="s_custom_event" name="Custom Event">
+        <section class="s_custom_event py-5">
+            <div class="container">
+                <div class="text-center pb-4">
+                    <h3 class="text-primary fw-bold">Latest News</h3>
+                </div>
+                <div class="row" id="s_custom_event_row">
+                    <div class="col-md-3">
+                        <div class="d-grid gap-2">
+                            <div class="w-100 rounded bg-light" style="height: 200px;"></div>
+                            <div class="w-100 rounded bg-light" style="height: 200px;"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="w-100 h-100 rounded bg-light" style="background-color: grey"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="w-100 h-100 rounded bg-light" style="background-color: grey"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

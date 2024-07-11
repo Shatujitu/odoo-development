@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- ====== List View ================================================ -->
+        <record id="view_case_study_list" model="ir.ui.view">
+            <field name="name">Case Study Page Tree</field>
+            <field name="model">case.study</field>
+            <field name="priority">99</field>
+            <field name="arch" type="xml">
+                <tree string="Case Studies">
+                    <field name="id" optional="hide"/>
+                    <field name="name" optional="show"/>
+                    <field name="title" optional="show"/>
+                    <field name="feature_image" optional="show"/>
+                    <field name="content" optional="hide"/>
+                    <field name="content_image" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+        <!-- ====== Form View ================================================ -->
+        <record id="view_case_study_form" model="ir.ui.view">
+            <field name="name">case.study.form</field>
+            <field name="model">case.study</field>
+            <field name="arch" type="xml">
+                <form string="Case Studies">
+                    <sheet>
+                        <field name="feature_image" widget="image" class="oe_avatar"/>
+                        <group name="work_package_details">
+                            <field name="name" placeholder="Case Study Name"/>
+                            <field name="title" placeholder="Case Study Title"/>
+                            <field name="content" placeholder="Case Study Content"/>
+                            <field name="content_image" placeholder="Case Study Content Image"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- ====== Actions ================================================ -->
+        <record id="action_case_study" model="ir.actions.act_window">
+            <field name="name">Case Studies</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">case.study</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('view_case_study_list')}),
+            ]"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                No Case Study yet!
+              </p><p>
+                Please add a new case study!
+              </p>
+            </field>
+        </record>
+        <!-- ====== Menu Items ============================================== -->
+        <menuitem id="menu_case_study"
+            parent="website.menu_content"
+            sequence="40"
+            name="Case Studies"
+            action="website_case_study.action_case_study"/>
+    </data>
+</odoo>
+

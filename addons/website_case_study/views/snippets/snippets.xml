@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="case_study_snippets" inherit_id="website.snippets" name="Case Study Snippets">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_structure" class="o_panel">
+                <div class="o_panel_header">Case Study</div>
+                <div class="o_panel_body">
+                    <t t-snippet="website_case_study.s_case_study" string="Case Study" t-thumbnail="/website_case_study/static/src/img/snippets_thumbs/s_case_study.svg">
+                        <keywords>case, study</keywords>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+    <template id="snippet_options_case_study" inherit_id="website.snippet_options" name="Case Study Options">
+        <xpath expr="//div[@data-js='Box']" position="after">
+            <div data-selector=".s_case_study">
+                <we-select string="Image Border">
+                    <we-button data-select-class="border-none">None</we-button>
+                    <we-button data-select-class="border-true">True</we-button>
+                </we-select>
+            </div>
+            <div data-selector=".s_case_study">
+                <we-select string="Modal">
+                    <we-button data-select-class="modal-false">False</we-button>
+                    <we-button data-select-class="modal-true">True</we-button>
+                </we-select>
+            </div>
+        </xpath>
+    </template>
+</odoo>

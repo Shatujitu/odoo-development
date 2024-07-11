@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_event_snippets" inherit_id="website.snippets" name="Custom Event Snippets">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_structure" class="o_panel">
+                <div class="o_panel_header">Custom Event</div>
+                <div class="o_panel_body">
+                    <t t-snippet="website_custom_event.s_custom_event" string="Custom Event" t-thumbnail="/website_custom_event/static/src/img/snippets_thumbs/s_custom_event.svg">
+                        <keywords>custom, event, blog</keywords>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

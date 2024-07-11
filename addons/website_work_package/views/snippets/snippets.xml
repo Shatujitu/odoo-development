@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="work_package_snippets" inherit_id="website.snippets" name="Work Package Snippets">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_structure" class="o_panel">
+                <div class="o_panel_header">Work Package</div>
+                <div class="o_panel_body">
+                    <t t-snippet="website_work_package.s_work_package" string="Work Package" t-thumbnail="/website_work_package/static/src/img/snippets_thumbs/s_work_package.svg">
+                        <keywords>work, package</keywords>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

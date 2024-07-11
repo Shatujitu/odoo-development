@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="consortium_partner_snippets" inherit_id="website.snippets" name="Consortium Partner Snippets">
+        <xpath expr="//div[@id='snippet_structure']" position="before">
+            <div id="snippet_structure" class="o_panel">
+                <div class="o_panel_header">Consortium Partners</div>
+                <div class="o_panel_body">
+                    <t t-snippet="website_consortium_partner.s_consortium_partner" string="Consortium Partners" t-thumbnail="/website_consortium_partner/static/src/img/snippets_thumbs/s_consortium_partner.svg">
+                        <keywords>consortium, partner</keywords>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

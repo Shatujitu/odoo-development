@@ -1,0 +1,33 @@
+.s_case_study {
+  &.border-true .card-image img {
+    border-radius: 20px;
+  }
+  &.modal-false .modal {
+    display: none;
+    visibility: hidden;
+  }
+  .card {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 16px rgba(54, 124, 193, 0.5);
+    border-radius: 20px;
+    padding: 0;
+    margin: 0;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0px 2px 16px rgba(0, 124, 193, 0.5);
+    }
+
+    .card-image {
+      img {
+        width: 100%;
+        aspect-ratio: 3/2;
+        object-fit: cover;
+      }
+    }
+    .card-title {
+    }
+    .card-text {
+    }
+  }
+}
